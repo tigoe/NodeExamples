@@ -1,3 +1,16 @@
+/*
+	Socket.io example
+	
+	Shows how to make a basic webSocket connection between a client and a server
+	using Socket.io version 1.0 or later (http://socket.io/)
+	The client uses p5.js (http://p5js.org/) to generate its UI and handle user events
+	
+	created 13 Jan 2015
+	by Tom Igoe
+	
+*/
+
+
 var express = require('express');			// include express.js
 var app = express();								// make an instance of express.js
 var http = require('http').Server(app);	// include http and make a server instance with the express instance
