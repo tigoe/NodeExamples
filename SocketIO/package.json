@@ -1,0 +1,15 @@
+{
+  "name": "SocketIOExample",
+  "version": "0.0.1",
+  "author": {
+  	"name":"Tom Igoe"
+   },
+  "dependencies": {
+	 "socket.io": ">=1.0.0",
+    "express": ">=3.0.0"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+
+	<script>
+		var socket = io();		// socket.io instance
+		var textInput, serverOutput, submitButton;	// UI elements
+		
+		function setup() {
+			textInput = createInput();							// create the text input box
+			textInput.size(100);									// size it
+			textInput.position(10, 10);						// position it
+			
+			submitButton = createButton("send");			// create the submit button
+			submitButton.position(120, 10);					// position it
+			submitButton.mousePressed(sendData);			// set its mousePressed behavior
+			
+			serverOutput = createDiv("Server response");	// create a div for server responses
+			serverOutput.position(10, 40);					// position it
+		}
+		
+		// this function sends data to the server. It's called when
+		// the submit button is pressed:
+  		function sendData() {
+	  		// send the server whatever is in the textInput box:
+	  		socket.emit('message', textInput.value());
+  		}
+  		
+  		// if the server sends you data, act on it:
+  		socket.on('message', function(data) {
+			serverOutput.html(data);
+		});
+ 		</script>
+
+	</head>
+	<body>
+	</body>
+</html>
