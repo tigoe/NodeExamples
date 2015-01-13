@@ -11,10 +11,10 @@
 
 */
 
-var http = require("http"),							// require HTTP library
+var http = require('http'),							// require HTTP library
 	server = http.createServer(respondToClient);	// create a server with a callback
 
-var hitCount = 0;
+var hitCount = 0;					// keep track of the number of requests
 
 server.listen(8080);				// start the server listening
 
@@ -46,5 +46,6 @@ function respondToClient(request, response) {
 	response.write("Hello, " + request.connection.remoteAddress);
 	response.write("hits: " + hitCount);
 	response.end();
+	// increment the hit counter:
 	hitCount++;
 };
