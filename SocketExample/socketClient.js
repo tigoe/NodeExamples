@@ -10,7 +10,7 @@
 	by Tom Igoe
 */
 
-var net = require('net'),,				// make an instance of the net library
+var net = require('net'),				// make an instance of the net library
 	client = new net.Socket(),			// make a new instance of the socket class
 	input = '';								// input string from the keyboard (STDIN)
 
