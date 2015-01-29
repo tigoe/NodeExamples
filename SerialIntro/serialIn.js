@@ -1,5 +1,5 @@
 /*
-	nodeSerialIn.js
+	serialIn.js
 	
 	Tests the functtionality of the serial port library
 		To be used in conjunction with the Arduino sketch called AnalogReadSerial.ino,
@@ -15,8 +15,11 @@
 	 
 	where portname is the path to the serial port.
 	
+	refactored to get rid of anonymous functions, to make it clearer for
+	those new to JavaScript
+	
 	created 21 Aug 2012
-	modified 28 Jan 2015
+	modified 29 Jan 2015
 	by Tom Igoe
 
 */

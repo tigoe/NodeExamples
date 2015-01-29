@@ -1,5 +1,5 @@
 /*
-	nodeSerialInBinary.js
+	serialInBinary.js
 	
 	Tests the functtionality of the serial port library
 		To be used in conjunction with the Arduino sketch called AnalogReadWriteBinary.ino,
@@ -15,53 +15,51 @@
 	 
 	where portname is the path to the serial port.
 	
+	refactored to get rid of anonymous functions, to make it clearer for
+	those new to JavaScript
+	
 	created 21 Aug 2012
-	modified 28 Jan 2015
+	modified 29 Jan 2015
 	by Tom Igoe
 
 */
-
 
 var serialport = require("serialport"),	// include the serialport library
 	SerialPort  = serialport.SerialPort,	// make a local instance of it
 	portName = process.argv[2];				// get the serial port name from the command line
 
-	
 // open the serial port. The portname comes from the command line:
 var myPort = new SerialPort(portName, { 
 	baudRate: 9600
 });
  
-// called when the serial port opens:
-myPort.on('open', function() {
+
+myPort.on('open', listen);			// called when the serial port opens
+myPort.on('close', closePort);	// called when the serial port closes
+myPort.on('error', serialError);	// called when there's an error with the serial port
+
+function listen() {
 	console.log('port open');
 	console.log('baud rate: ' + myPort.options.baudRate);
+	myPort.on('data', printIncoming);	// called when there's new incoming serial data
 	
-	// called when there's new incoming serial data:  
-	myPort.on('data', function (data) {
+	// you only need this function if your port is open,
+	// so it's local to the listen() function:
+	function printIncoming(data) {
 		// data buffer will be variable length
 		// depending on how fast the transmitting device is sending. 
 		// read each byte of the buffer:
 		for (var c=0; c<data.length; c++) {
 			console.log(data.readUInt8(c));
-		}
-	});
-});
+		}	
+	}
+}
 
-// called when the serial port closes:
-myPort.on('close', function() {
+function closePort() {
 	console.log('port closed');
-});
+}
 
-// called when there's an error with the serial port:
-myPort.on('error', function(error) {
+function serialError(error) {
 	console.log('there was an error with the serial port: ' + error);
 	myPort.close();
-});
-
-
-
-
-
-
-
+}
