@@ -32,25 +32,28 @@ var myPort = new SerialPort(portName, {
 	parser: serialport.parsers.readline('\r\n')
 });
  
-// called when the serial port opens:
-myPort.on('open', function() {
+
+myPort.on('open', listen);			// called when the serial port opens
+myPort.on('close', closePort);	// called when the serial port closes
+myPort.on('error', serialError);	// called when there's an error with the serial port
+
+function listen() {
 	console.log('port open');
 	console.log('baud rate: ' + myPort.options.baudRate);
+	myPort.on('data', printIncoming);	// called when there's new incoming serial data
 	
-	// called when there's new incoming serial data:  
-	myPort.on('data', function (data) {
-		// for debugging, you should see this in Terminal:
+	// you only need this function if your port is open,
+	// so it's local to the listen() function:
+	function printIncoming(data) {
 		console.log(data);
-	});
-});
+	}
+}
 
-// called when the serial port closes:
-myPort.on('close', function() {
+function closePort() {
 	console.log('port closed');
-});
+}
 
-// called when there's an error with the serial port:
-myPort.on('error', function(error) {
+function serialError(error) {
 	console.log('there was an error with the serial port: ' + error);
 	myPort.close();
-});
+}
