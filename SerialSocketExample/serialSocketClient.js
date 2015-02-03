@@ -20,6 +20,16 @@ var net = require('net'),				// make an instance of the net library
 var serialport = require("serialport"),	// include the serialport library
 	SerialPort  = serialport.SerialPort,	// make a local instance of it
 	portName = process.argv[2];				// get the serial port name from the command line
+	serverAddress = process.argv[3], 		// get the server address from the command line
+	portNumber = process.argv[4];				// get the port number from the command line
+
+// make sure the port name, the server address, and the port number are all filled in:
+if (!portName || !serverAddress || !portNumber) {
+	console.log("To run this program, you need to give the serial port name,"); 
+	console.log("The server IP address, and the port number, like so:\n");
+	console.log("node serialSocketClient.js <serialPort> <ipAddress> <portNumber>\n\n");
+	process.exit(0);
+}
 
 // open the serial port. The portname comes from the command line:
 var myPort = new SerialPort(portName, { 
@@ -36,7 +46,7 @@ myPort.on('open', function() {
 	console.log('port open');
 	console.log('baud rate: ' + myPort.options.baudRate);
 	// connect to the server on localhost:
-	client.connect(8001, '127.0.0.1', login);	
+	client.connect(portNumber, serverAddress, login);	
 
 	
 	// this function runs when the client successfully connects:

@@ -7,18 +7,28 @@
 	'end' event, the program stops.
 	
 	created 25 Jan 2015
+	modified 3 Feb 2015
 	by Tom Igoe
 */
 
 var net = require('net'),				// make an instance of the net library
 	client = new net.Socket(),			// make a new instance of the socket class
-	input = '';								// input string from the keyboard (STDIN)
+	input = '',								// input string from the keyboard (STDIN)
+	serverAddress = process.argv[2], // get the server address from the command line
+	portNumber = process.argv[3];		// get the port number from the command line
+
+// make sure the server address, and the port number are filled in:
+if (!serverAddress || !portNumber) {
+	console.log("To run this program, you need to give the server IP address and the port number, like so:\n");
+	console.log("node serialSocketClient.js <ipAddress> <portNumber>\n\n");
+	process.exit(0);
+}
 
 var stdin = process.openStdin();		// enable input from the keyboard
 stdin.setEncoding('utf8');			   // encode everything typed as a string
 
 	
-client.connect(8001, '127.0.0.1', login);	// connect to the server on localhost
+client.connect(portNumber, serverAddress, login);	// connect to the server
 
 // this function runs when the client successfully connects:
 function login() {
@@ -41,7 +51,6 @@ function login() {
 	// this function runs if there's input from the keyboard.
 	// you need to hit enter to generate this event.
 	stdin.on('data', function(data) {
-		 data = data.trim()							// trim any whitespace from the string
 		client.write(data);							// send it to the server
 	});
 }
