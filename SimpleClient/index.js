@@ -40,5 +40,5 @@ function callback(response) {
 }
 
 // make the actual request:
-request = https.request(options, callback);	// start it
-request.end();											// end it
+var request = https.request(options, callback);	// start it
+request.end();												// end it
