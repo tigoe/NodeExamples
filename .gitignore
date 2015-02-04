@@ -4,3 +4,4 @@ WriteToFile/node_modules/*
 Traceroute/node_modules/*
 SerialSocketExample/node_modules/*
 SerialIntro/node_modules/*
+node-hue-api/*
