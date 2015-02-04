@@ -24,7 +24,7 @@ function listenForClients(client) {
 	client.setEncoding('utf8');	// encode everything sent by the client as a string
 	client.write('hello');			// send the client a hello message
 	clients.push(client);			// append the client to the array of clients
-
+	
 	// this function runs if the client sends an 'end' event: 
 	client.on('end', function() {
    	console.log('client disconnected');
@@ -36,7 +36,7 @@ function listenForClients(client) {
   	client.on('data', function(data) {
 	  	data = data.trim();						// trim any whitespace from the string
    	console.log(data);			
-   	if (data === 'exit') {					// if the client sends 'exit',
+   	if (data === 'x') {					   // if the client sends 'exit',
 			console.log('closing client');
 			client.end();							// disconnect the client
 		}
@@ -57,4 +57,4 @@ function listenForClients(client) {
 }
  
 // start the server listening:
-server.listen(8001);
+server.listen(8080);

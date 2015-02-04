@@ -45,7 +45,7 @@ function login() {
   	// this function runs if the client ends, either locally
   	// or from the server:	
 	client.on('end', function() {
-		client.destroy();				// destroy the connection 
+		console.log("socket closed"); 
 	});
 	
 	// this function runs if there's input from the keyboard.
