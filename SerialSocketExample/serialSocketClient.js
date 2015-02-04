@@ -55,23 +55,23 @@ myPort.on('open', function() {
 
 	// called when there's new incoming serial data:  
 	myPort.on('data', function(data) {		
-			if (connected) {
-				client.write(data);
-			}
-			
-			// run through all the bytes in the incoming data string:
-			for (var c=0; c<data.length; c++) {
-				// convert each byte to its unicode character:
-				var thisByte = String.fromCharCode(data[c]);
-				console.log(thisByte);
-				// if the byte is x and you're not connected, connect:
-				if (thisByte === 'x' && !connected) {
-					console.log("I am connecting");
-					// connect to the server:
-					client = new net.Socket(),
-					client.connect(portNumber, serverAddress, login);
-				} 
-			}
+		if (connected) {
+			client.write(data);
+		}
+		
+		// run through all the bytes in the incoming data string:
+		for (var c=0; c<data.length; c++) {
+			// convert each byte to its unicode character:
+			var thisByte = String.fromCharCode(data[c]);
+			console.log(thisByte);
+			// if the byte is x and you're not connected, connect:
+			if (thisByte === 'x' && !connected) {
+				console.log("I am connecting");
+				// connect to the server:
+				client = new net.Socket(),
+				client.connect(portNumber, serverAddress, login);
+			} 
+		}
 	
 		// this function runs when the client successfully connects:
 		function login() {
