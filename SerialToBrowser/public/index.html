@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js"></script>
+
+	<script>
+		var label, serverResponse;	// UI elements
+		
+		function setup() {			
+			label = createSpan("Volume:");	// the label 
+			label.position(10,20);				// position it
+			serverResponse = createSpan();	// create a div for server responses
+			serverResponse.position(label.width + 15, 20);		// position it
+			getData(3);								// make a request back to the server
+		}
+		
+		// this function makes a call to the server:
+  		function getData(channel) {
+  			httpGet('/device/' + channel, update);
+  		}
+  		
+  		// update the page when the server responds:
+  		function update(data) {
+	  		serverResponse.html(data);		// put the response in the span
+	  		getData(3);							// make another call to the server
+  		}
+  		
+ 		</script>
+	</head>
+	<body>
+	</body>
+</html>
