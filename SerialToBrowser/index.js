@@ -4,6 +4,15 @@
 	which communicates with the serial port.
 	in Express.js 4.0
 	
+	This has a RESTful interface.  The static index.html page
+	will continally request /device/3, which will return the value from the 
+	serial port.
+	
+	to start this:
+	node index.js portname
+	
+	where portname is the name of your serial port
+	
 	created 10 Feb 2015
 	by Tom Igoe
 */
@@ -49,9 +58,11 @@ function getSensorReading(request, response) {
 	var channel = request.params.channel;  
 	console.log("getting channel: "+ channel + "...");
 	
-	// send it out the serial port and wait for a response:
+	// send the channel number out the serial port 
+	//and wait for a response:
 	myPort.write(channel, function(){
-		// when you get a response from the serial port, write it out to the client: 
+		// when you get a response from the serial port, 
+		//write it out to the client: 
 		myPort.on('data', function(data) {
 			// send the data and close the connection:
 			response.write(data);
@@ -63,7 +74,7 @@ function getSensorReading(request, response) {
 // start the server:
 var server = app.listen(8080, serverStart);
 // start the listeners for GET requests:
-app.get('/files/:name', serveFiles);	// GET handler for all static files
-app.get('/device/:channel', getSensorReading);				// GET handler for /date
+app.get('/files/:name', serveFiles);				// GET handler for all static files
+app.get('/device/:channel', getSensorReading);	// GET handler for /device
 
 
