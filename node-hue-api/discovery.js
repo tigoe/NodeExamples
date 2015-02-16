@@ -10,14 +10,20 @@
 	
 	Based on the examples in the node-hue-api readme:
 	https://github.com/peter-murray/node-hue-api
+	
+	to call this from the commandline:
+	node discovery.js address username
+	or 
+	node discovery.js address
+	or 
+	node discovery.js
 */
 
 var hue = require("node-hue-api"),			// include the node-hue-api library
 	HueApi = hue.HueApi,							// make a local instance of HueApi
 	hub; 												// will hold the hub info when you instantiate it
 	
-var username = process.argv[3],				// your app's username from the command line, 
-														// must be ten chars or longer
+var username = process.argv[3],				// your app's username from the command line
 	address = process.argv[2];					// hub IP address from command line
 	
 
@@ -32,7 +38,6 @@ function displayConfig() {
 	    	if the username above is registered to the bridge,
 		 	you'll get the detailed config. Otherwise you'll only get the short details:
 		*/
-	   hub = new HueApi(address, username);
 	   hub.getConfig()			// get the config
 	   	.then(displayResult)	// if successful, display what you got
 			.done();
@@ -53,14 +58,15 @@ function displayBridges(bridges) {
 //----------------------------------
 // This is where execution of the script starts
 
-if (!username) {							// if no command line username,
-	username = 'atleasttenletters';	//make one up
+if (!username) {									// if no command line username,
+	username = 'atleasttenletters';			// make one up
 }
 
-if (address) {						// if there's a command line address,
-	displayConfig();				// get the config for that hub
-} else {								// if not, 
-	hue.nupnpSearch()				// start a search on the LAN for hubs
-		.then(displayBridges)	// if successful, display the details
+if (address) {										// if there's a command line address,
+	hub = new HueApi(address, username);	// instantiate the hub
+	displayConfig();								// get the config for that hub
+} else {												// if not, 
+	hue.nupnpSearch()								// start a search on the LAN for hubs
+		.then(displayBridges)					// if successful, display the details
 		.done();
 }
