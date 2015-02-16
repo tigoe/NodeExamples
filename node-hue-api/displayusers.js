@@ -23,14 +23,11 @@ var hue = require("node-hue-api"),			// include the node-hue-api library
 	
 var username = process.argv[3],				// your app's username from the command line
 	address = process.argv[2];					// hub IP address from command line
-	
-
 
 // print a JSON object nicely:
 var displayResult = function(result) {
     console.log(JSON.stringify(result, null, 2));
 };
-
 
 function displayUsers() {
 	hub.registeredUsers()
@@ -47,10 +44,8 @@ if (!username) {									// if no command line username,
 
 if (address) {										// if there's a command line address,
 	hub = new HueApi(address, username);	// instantiate the hub
-	displayUsers();								// get the config for that hub
-} else {												// if not,
+	displayUsers();								// get the list of users for that hub
+} else {												// if not, quit.
 	console.log("You need to enter the hub address.\n\n"); 
 	process.exit(0);
 }
-
-
