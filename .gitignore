@@ -4,6 +4,6 @@ WriteToFile/node_modules/*
 Traceroute/node_modules/*
 SerialSocketExample/node_modules/*
 SerialIntro/node_modules/*
-node-hue-api/*
+node-hue-api/node_modules/*
 ExpressIntro/node_modules/*
 SerialToBrowser/node_modules/*
