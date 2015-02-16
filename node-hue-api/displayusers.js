@@ -49,6 +49,14 @@ function addUser(address, newUserName, userDescription) {
 	   .done();
 }
 
+// remove a user:
+function removeUser(username) {
+	hub.deleteUser(username)
+	   .then(displayResult)
+	   .fail(displayError)
+	   .done();
+}
+
 //----------------------------------
 // This is where execution of the script starts
 
@@ -59,9 +67,11 @@ if (!username) {									// if no command line username,
 if (address) {										// if there's a command line address,
 	hub = new HueApi(address, username);	// instantiate the hub
 	displayUsers();								// get the list of users for that hub
-	// uncomment this if you want to add the username as a new user:
-	//addUser(address, username, username + ' developer account');
-} else {												// if not, quit.
+	// uncomment the next line if you want to add the username as a new user:
+	// addUser(address, username, username + ' developer account');
+	// uncomment the next line if you want to delete the username:
+	// removeUser(username);
+} else {												// if no address is given, quit.
 	console.log("You need to enter the hub address.\n\n"); 
 	process.exit(0);
 }
