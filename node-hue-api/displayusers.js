@@ -1,5 +1,5 @@
 /*
-	hue-node-api display users example
+	node-hue-api display users example
 	This example contacts a hue hub and prints out the list of registered users.
 	The example uses the promises interface to node-hue-api.
 	

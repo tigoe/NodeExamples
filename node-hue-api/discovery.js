@@ -1,5 +1,5 @@
 /*
-	hue-node-api discover and get config
+	node-hue-api discover and get config
 	This example searches the LAN for hue hubs, and prints out their basic 
 	details. Then it takes the first hub found and prints the detailed config
 	The example uses the promises interface to node-hue-api.
