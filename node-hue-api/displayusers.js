@@ -29,10 +29,24 @@ var displayResult = function(result) {
     console.log(JSON.stringify(result, null, 2));
 };
 
+// print a JSON object nicely:
+var displayError = function(error) {
+    console.log(JSON.stringify(error, null, 2));
+};
+
+// display all registered users:
 function displayUsers() {
 	hub.registeredUsers()
 		.then(displayResult)
 		.done();
+}
+
+// add a new user:
+function addUser(address, newUserName, userDescription) {
+	hub.registerUser(address, newUserName, userDescription)
+	   .then(displayResult)
+	   .fail(displayError)
+	   .done();
 }
 
 //----------------------------------
@@ -45,6 +59,8 @@ if (!username) {									// if no command line username,
 if (address) {										// if there's a command line address,
 	hub = new HueApi(address, username);	// instantiate the hub
 	displayUsers();								// get the list of users for that hub
+	// uncomment this if you want to add the username as a new user:
+	//addUser(address, username, username + ' developer account');
 } else {												// if not, quit.
 	console.log("You need to enter the hub address.\n\n"); 
 	process.exit(0);
