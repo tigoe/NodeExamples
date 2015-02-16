@@ -13,38 +13,54 @@
 */
 
 var hue = require("node-hue-api"),			// include the node-hue-api library
-	HueApi = hue.HueApi;							// make a local instance of HueApi
+	HueApi = hue.HueApi,							// make a local instance of HueApi
+	hub; 												// will hold the hub info when you instantiate it
 	
-var username = 'thomaspatrickigoe',			// your app's username, ten chars or longer
-	address;											// hub IP address
-
+var username = process.argv[3],				// your app's username from the command line, 
+														// must be ten chars or longer
+	address = process.argv[2];					// hub IP address from command line
+	
 
 // print a JSON object nicely:
 function displayResult(result) {
    console.log(JSON.stringify(result, null, 2));
-};
-	
+}
 
-function displayBridges(thisBridge) {
-   console.log("Hue Bridges Found: ");		// print the list of bridges found
-   displayResult(thisBridge);
-  if (thisBridge.length > 0) { 
-	   // pull out the first bridge found:
-	   address = thisBridge[0].ipaddress;
-	   
-	   /* 
+function displayConfig() {
+		   /* 
 			get the detailed config for the bridge.
 	    	if the username above is registered to the bridge,
 		 	you'll get the detailed config. Otherwise you'll only get the short details:
 		*/
-	   var api = new HueApi(address, username);
-	    api.getConfig()			// get the config
-	    	.then(displayResult)	// if successful, display what you got
-	    	.done();
-   }
+	   hub = new HueApi(address, username);
+	   hub.getConfig()			// get the config
+	   	.then(displayResult)	// if successful, display what you got
+			.done();
 }
 
- hue.nupnpSearch()			// start a search on the LAN for hubs
- 	.then(displayBridges)	// if successful, display the details
- 	.done();
+function displayBridges(bridges) {
+	console.log("Hue Bridges Found: ");		// print the list of bridges found
+	displayResult(bridges);
+	if (bridges.length > 0) { 
+	   // pull out the first bridge found:
+	   for (thisBridge in bridges) {
+	   	address = bridges[thisBridge].ipaddress;
+			displayConfig(address);
+	   }
+	}
+}
 
+//----------------------------------
+// This is where execution of the script starts
+
+if (!username) {							// if no command line username,
+	username = 'atleasttenletters';	//make one up
+}
+
+if (address) {						// if there's a command line address,
+	displayConfig();				// get the config for that hub
+} else {								// if not, 
+	hue.nupnpSearch()				// start a search on the LAN for hubs
+		.then(displayBridges)	// if successful, display the details
+		.done();
+}
