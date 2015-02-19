@@ -52,6 +52,7 @@ var displayError = function(error) {
 function displayUsers() {
 	hub.registeredUsers()
 		.then(displayResult)
+		.fail(displayError)
 		.done();
 }
 
