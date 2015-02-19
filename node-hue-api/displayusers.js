@@ -30,8 +30,22 @@ var displayResult = function(result) {
 };
 
 // print a JSON object nicely:
+var displayAdd = function(result) {
+    console.log(JSON.stringify(result, null, 2));
+    console.log('successfully added\n');
+};
+
+// print a JSON object nicely:
+var displayDelete = function(result) {
+    console.log(JSON.stringify(result, null, 2));
+    console.log('successfully deleted\n');
+};
+
+
+// print a JSON object nicely:
 var displayError = function(error) {
     console.log(JSON.stringify(error, null, 2));
+    console.log('I could not execute your command. I feel miserable. Hug me.\n')
 };
 
 // display all registered users:
@@ -44,7 +58,7 @@ function displayUsers() {
 // add a new user:
 function addUser(address, newUserName, userDescription) {
 	hub.registerUser(address, newUserName, userDescription)
-	   .then(displayResult)
+	   .then(displayAdd)
 	   .fail(displayError)
 	   .done();
 }
@@ -52,7 +66,7 @@ function addUser(address, newUserName, userDescription) {
 // remove a user:
 function removeUser(username) {
 	hub.deleteUser(username)
-	   .then(displayResult)
+	   .then(displayDelete)
 	   .fail(displayError)
 	   .done();
 }
@@ -68,9 +82,8 @@ if (address) {										// if there's a command line address,
 	hub = new HueApi(address, username);	// instantiate the hub
 	displayUsers();								// get the list of users for that hub
 	// uncomment the next line if you want to add the username as a new user:
-	// addUser(address, username, username + ' developer account');
+	 // addUser(address, username, username + ' developer account');
 	// uncomment the next line if you want to delete the username:
-	// removeUser(username);
 } else {												// if no address is given, quit.
 	console.log("You need to enter the hub address.\n\n"); 
 	process.exit(0);
