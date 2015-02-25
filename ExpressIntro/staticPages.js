@@ -48,7 +48,8 @@ function serveFiles(request, response) {
 function serveDate(request, response) {
 	console.log('got a GET request');
 	// send the response:
-	response.send("Date: " + Date.now() + "\n");
+  var now = new Date();
+	response.send("Date: " + now + "\n");
 	response.end();
 }
 
