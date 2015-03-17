@@ -8,11 +8,11 @@
 */
 
 var express = require('express');			// include express.js
-var app = express();								// a local instance of it
+var app = express();						// a local instance of it
 var bodyParser = require('body-parser');	// include body-parser
 
 // you need a couple of parsers for the body of a POST request:
-app.use(bodyParser.json()); // for  application/json
+app.use(bodyParser.json()); 						// for  application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for application/x-www-form-urlencoded
 
 // this runs after the server successfully starts:
