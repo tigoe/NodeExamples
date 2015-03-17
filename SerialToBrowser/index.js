@@ -65,8 +65,7 @@ function getSensorReading(request, response) {
 		//write it out to the client: 
 		myPort.on('data', function(data) {
 			// send the data and close the connection:
-			response.write(data);
-			response.end();
+			response.end(data);
 		});	
 	}); 
 }
