@@ -1,10 +1,10 @@
 /*
 	Socket.io example
-	
+
 	Shows how to make a basic webSocket connection between a client and a server
 	using Socket.io version 1.0 or later (http://socket.io/)
 	The client uses p5.js (http://p5js.org/) to generate its UI and handle user events
-	
+
 	created 13 Jan 2015
 	modified 24 Feb 2015
 	by Tom Igoe
@@ -37,8 +37,8 @@ io.on('connection', function(socket){
 			socket.emit('message',message);
 		}
 		// when a socket's open, send the time once a second:
-		setInterval(sendTime, 1000);
-	}); 
+		setInterval(sendTime, 2000);
+	});
 });
 
 // listen for incoming server messages:

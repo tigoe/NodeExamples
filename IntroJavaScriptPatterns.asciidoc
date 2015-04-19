@@ -1,0 +1,149 @@
+==An Introduction to JavaScript for Processing and Arduino Users
+
+===Variables
+
+If you understand variable scope from C or Java (or Arduino or Processing), you'll need to get used to some differences with JavaScript. Variable scope is different in JavaScript, and variable declaration is handled differntly as well.
+
+JavaScript treats any variable that's never previously been declared as a global variable as well, so you should make sure you declare all your variables before you use them, using the keyword +var+, like so:
+
+[source, js]
+----
+var pageCounter = 0;
+----
+
+You can declare multiple variables using the same +var+ keyword, which you'll see all the time. When you do, separate the variable declarations with commas like so:
+
+[source, js]
+----
+var pageCounter = 0,
+	clickCounter = 0,
+	myName = "Tom", 
+	myArray = {};
+----
+
+Any variable that's not declared with the +var+ keyword before you use it is assumed to be a global. 
+
+====Global Variables
+
+Global variables in JavaScript are shared between all the scripts in your environment. 
+For example, imagine you're writing a custom script for a given web page, and you're also including a library you downloaded from the web. Both your script and the library share the same global variable namespace, so it's possible to overwrite the variables of the library and not even know it. 
+
+Here's an example of a global variable shared by two scripts. The first is a script called +myScript.js+. It has just one line, that declares a variable named +myName+. Save it as a file called +myScript.js+:
+
+[source, js]
+----
+var myName = "Tom";
+----
+
+This script is called by the following HTML page, +index.html+, that has another script embedded in the head. Save it as +index.html+ in the same directory as +myScript+:
+
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="myScript.js"></script>
+
+	<script type="text/javascript">
+		var myName = "Ed";
+		
+		function fillDiv(whichElement) {
+			whichElement.innerHTML = myName;
+		}
+	</script>
+
+	</head>
+	<body onload="fillDiv(nameDiv);">
+		<div id="nameDiv"></div>
+	</body>
+</html>
+----
+
+The variable +myName+ is a global variable that's declared in both +myScript.js+ and the embedded script. Since the embedded script loads after +myScript.js+, +myName+ gets overwritten here. Open this page in a browser, and you should see the name "Ed" in the +nameDiv+ div. Then comment out the line that declares myName and reload the page. You'll see the name "Tom" instead, which is the value given to myName in +myScript.js+.
+
+A well-written JavaScriptlibrary will minimize use of globals, and let you know what they are in the documentation so that you don't overwrite them. You should do the same. When possible, declare your variables inside of the functions that need them rather than globally.
+
+====Variable Hoisting
+
+You can scatter variable declarations throughout a function, but all variables declared in a given function are available to the whole function. This is a major difference from C and Java, in which a variable is only available to the block of code in which it's declared. If you declare variables in a for loop or an if statement in JavaScript, for example, they're not just local to that statement; they're available throughout the function in which they're declared. Because of this, it's good practice to declare all your variables at the beginning of your function. That way, you don't inadvertently overwrite a variable. 
+
+===Functions
+
+Functions in JavaScript are first class objects. That means you can create them dynamically in your code, you can assign them to variables, you can pass them as arguments to other functions, and they can have their own properties and methods. Thus, there are a few of ways you can declare functions in JavaScript. The most familiar (to C and Java users) is like so:
+
+[source, js]
+----
+// first declare the function:
+function doSomething() {
+	// function code goes here
+}
+
+// now call the function:
+doSomething();
+---
+
+You can also declare functions as variables like so:
+
+[source, js]
+----
+var doSomething = function() {
+	// function code goes here
+}
+---
+
+Because functions can be assigned to variables, you can compare them like variables as well, check their types, and many other useful things, as you'll see later on.
+
+====Callback Functions
+
+You'll see functions passed as parameters of other functions all the time. When used this way, they're called *callback functions*. Callback functions are most commonly used to handle success or failure of the function that calls them. 
+
+The simplest way to see callbacks in action is to use the +setInterval()+ function, a core function in JavaScript. This function accepts a callback function as its first parameter, and a time interval as its second parameter. You can use it to make things happen on a regular interval.  Here's a simple clock script. First you declare the thing you want to happen as a function. Then you call +setInterval()+ with this function as a parameter like so:
+
+[source, js]
+----
+// This function prints the current date and time:
+function tick() {
+	var now = new Date();	
+	console.log(now);
+}
+
+// now call setInterval(), which will call tick() once per second (1000ms):
+setInterval(tick, 1000);
+----
+
+Save this as +clock.js+ then run it in node.js like so:
+
+[source, bash]
+----
+$ node clock.js
+---
+
+The script will print the time once a second. Every second it's making a callback to the function +tick()+. 
+
+
+====Closures
+
+Functions don't have to be declared in advance; you can declare them dynamically, when you need them, inside of other functions. Functions that are declared in this way are called *closures*  (also called *immediate functions*) and you'll see them frequently in node.js. The tick() function in the clock example above can be written as an closure like so:
+
+[source, js]
+----
+setInterval(function() {
+	var now = new Date();	
+	console.log(now);
+}, 1000);
+----
+
+There's one big advantage to using functions in this way: a function enclosed within another function has access to the variables declared in the parent function, in addition to its own variables. This can simplify the sharing of data between functions, and it's one major reason you'll see closures used frequently in node.js. 
+
+When a closure isn't given a name, as in the example above, they're called *anonymous functions* You can give your closures names if you wish; it'll help you to find them in stack trace when you have errors. Here's the function above with a name:
+
+[source, js]
+----
+setInterval(function tick() {
+	var now = new Date();	
+	console.log(now);
+}, 1000);
+----
+
+===Asynchronous Functions
+
