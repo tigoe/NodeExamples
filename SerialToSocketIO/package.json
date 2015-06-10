@@ -1,24 +1,23 @@
 {
   "name": "SerialToSocketIO",
   "version": "0.0.1",
-  "description": "A server that connects socketIO clients to serial devices on the server",
+  "description": "Serial to socket.io server",
   "main": "server.js",
   "dependencies": {
     "express": "^4.12.4",
-    "serialport": "^1.7.4"
+    "serialport": "^1.7.4",
+    "socket.io": "^1.3.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Tom Igoe",
-  "license": "ISC",
   "keywords": [
     "serial",
-    "socket.io",
-    "express",
-    "physical",
-    "computing"
-  ]
+    "websocket",
+    "socket.io"
+  ],
+  "author": "Tom Igoe",
+  "license": "ISC"
 }
