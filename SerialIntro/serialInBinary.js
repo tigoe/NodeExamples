@@ -19,7 +19,7 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 
 created 21 Aug 2012
-modified 29 Jan 2015
+modified 10 Jun 2015
 by Tom Igoe
 
 */
