@@ -1,51 +1,52 @@
 /*
 	nodeSerialInXBee.js
-	
+
 	Takes in a serial stream from a Digi XBee 802.15.4 radio (XB24 firmware)
 
-	This script expects a steady stream of input from the serial port 
+	This script expects a steady stream of input from the serial port
 	separated by a byte with the value 0x7E.
 
 	This is written as an exercise to see if I could interpret XBee API packets
 	in node.js. This is not production-ready code.
-	
+
 	To call this from the command line:
-	
+
 	node serialTest.js portname
-	 
+
 	where portname is the path to the serial port.
-	
+
 	created 22 Dec 2014
+	modified 10 Jun 2015
 	by Tom Igoe
 */
 
-var serialport = require("serialport"),		// include the serialport library
-	SerialPort  = serialport.SerialPort,	// make a local instance of it
-	portName = process.argv[2],				// get the serial port name from the command line						
-	
-// open the serial port. The portname comes from the command line:
-var myPort = new SerialPort(portName, { 
-	baudRate: 9600,
-	parser: serialport.parsers.readline("\x7E")	// the XBee API terminator
-});
- 
+// serial port initialization:
+var serialport = require('serialport'),		// include the serialport library
+SerialPort  = serialport.SerialPort,			// make a local instance of serial
+portName = process.argv[2],								// get the port name from the command line
+portConfig = {
+	baudRate: 9600
+};
+
+// open the serial port:
+var myPort = new SerialPort(portName, portConfig);
+
 // called when the serial port opens:
 myPort.on('open', function() {
 	console.log('port open');
 	console.log('baud rate: ' + myPort.options.baudRate);
-	
-	// called when there's new incoming serial data:  
+
+	// called when there's new incoming serial data:
 	myPort.on('data', function (data) {
 		var output = [];		// an array to hold the output
-	
+
 		for (c in data) {
-			var value = data.charCodeAt(c);		// get the byte value
+			var value = data.charCodeAt(c);			// get the byte value
 			if (value > 255) value = value >>8;	// if it's > 255, get the last 8 bits
-			output.push(value);					// add it to the output array
+			output.push(value);									// add it to the output array
 		}
-		
+
 		parseData(output);						// run this through the parser
-	
 	});
 });
 
@@ -65,7 +66,7 @@ myPort.on('error', function(error) {
 	This parser is adapted from one I wrote for an example in "Making Things Talk"
 	(specifically https://github.com/tigoe/MakingThingsTalk2/blob/master/chapter7/project14/XbeePacketGrapher/XbeePacketGrapher.pde)
 
-	The packet should be 22 bytes long, 
+	The packet should be 22 bytes long,
  	made up of the following:
  	byte 1:     0x7E, the start byte value
  	byte 2-3:   packet size, a 2-byte value  (not used here)
@@ -75,8 +76,8 @@ myPort.on('error', function(error) {
  	byte 8:     Broadcast options (not used here)
  	byte 9:     Number of samples to follow
  	byte 10-11: Active channels indicator (not used here)
- 	byte 12-21: 5 10-bit values, each ADC samples from the sender 
-	
+ 	byte 12-21: 5 10-bit values, each ADC samples from the sender
+
 	The Xbee radio sending this packet should have the following settings:
 	ATMY (whatver address you want)
 	ATDL (the address of the receiving radio)
@@ -104,7 +105,7 @@ function parseData(thisPacket) {
     // because each reading is two bytes long:
     for (var i = 0; i < numSamples * 2;  i=i+2) {
       // 10-bit value = high byte * 256 + low byte:
-      var thisSample = (thisPacket[i + adcStart] * 256) + 
+      var thisSample = (thisPacket[i + adcStart] * 256) +
         thisPacket[(i + 1) + adcStart];
       // put the result in one of 5 bytes:
       adcValues[i/2] = thisSample;
@@ -114,8 +115,8 @@ function parseData(thisPacket) {
     // average the result:
     var average = total / numSamples;
   }
-  console.log("address: " + address 
-  	+ " RSSI: " + signalStrength 
-  	+ " samples: " + numSamples 
+  console.log("address: " + address
+  	+ " RSSI: " + signalStrength
+  	+ " samples: " + numSamples
   	+ " average: " + average);
 }
