@@ -7,12 +7,11 @@ those new to JavaScript
 */
 
 var serialport = require("serialport");
-var SerialPort = serialport.SerialPort; // localize object constructor
 
 // list serial ports:
 serialport.list(listPorts);
 
-function listPorts(err, ports) {
+function listPorts(error, ports) {
 	ports.forEach(printPort);
 
 	function printPort(port) {

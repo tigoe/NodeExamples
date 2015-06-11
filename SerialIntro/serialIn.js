@@ -24,17 +24,18 @@ by Tom Igoe
 
 */
 
-var serialport = require("serialport"),	// include the serialport library
-SerialPort  = serialport.SerialPort,	// make a local instance of it
-portName = process.argv[2];				// get the serial port name from the command line
+// serial port initialization:
+var serialport = require('serialport'),			// include the serialport library
+	SerialPort  = serialport.SerialPort,			// make a local instance of serial
+	portName = process.argv[2],								// get the port name from the command line
+	portConfig = {
+		baudRate: 9600,
+		// call myPort.on('data') when a newline is received:
+		parser: serialport.parsers.readline('\n')
+	};
 
-// open the serial port. The portname comes from the command line:
-var myPort = new SerialPort(portName, {
-	baudRate: 9600,
-	// look for newline at the end of each data packet:
-	parser: serialport.parsers.readline('\n')
-});
-
+// open the serial port:
+var myPort = new SerialPort(portName, portConfig);
 
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
