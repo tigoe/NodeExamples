@@ -6,7 +6,7 @@ Prints all client text to the console. Keeps track of clients
 in an array. Typing 'c' will print the array of clients
 
 created 25 Jan 2015
-modified 14 Mar 2015
+modified 28 Jun 2015
 by Tom Igoe
 */
 
@@ -41,6 +41,11 @@ function listenForClients(client) {
     console.log('closing client');
     client.end();                  // disconnect the client
   }
+
+  // handle any network errors:
+  client.on('error', function (err) {
+    console.error('Network connection error', err);
+  });
 });
 
 // this function runs if there's input from the keyboard.
