@@ -21,7 +21,8 @@ var server = net.createServer(listenForClients);  // create the server
 
 // This function is called every time a new client connects:
 function listenForClients(client) {
-  console.log('client connected');
+  console.log('client connected at ' + new Date());
+  console.log('client: ' + client.remoteAddress);
   client.setEncoding('utf8');  // encode everything sent by the client as a string
   client.write('hello');      // send the client a hello message
   clients.push(client);       // append the client to the array of clients
