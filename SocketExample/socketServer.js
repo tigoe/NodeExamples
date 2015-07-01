@@ -48,6 +48,18 @@ function listenForClients(client) {
     console.error('Network connection error', err);
     client.end();
   });
+
+  function checkCLientList() {
+    log('cleaning up client list');
+      for (c in clients) {
+        if (typeof(client[c]) === 'undefined') {
+          var position = clients.indexOf(client); // get the client's position in the array
+          clients.splice(position, 1);            // delete it from the array
+        }
+      }
+  }
+
+  setInterval(checkClientList, 5000);
 });
 
 // this function runs if there's input from the keyboard.
