@@ -50,7 +50,7 @@ function listenForClients(client) {
   });
 
   function checkClientList() {
-    log('cleaning up client list');
+    console.log('cleaning up client list');
       for (c in clients) {
         if (typeof(client[c]) === 'undefined') {
           var position = clients.indexOf(client); // get the client's position in the array
