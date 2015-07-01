@@ -37,7 +37,7 @@ function listenForClients(client) {
   // this function runs if the client sends data:
   client.on('data', function(data) {
     data = data.trim();            // trim any whitespace from the string
-    console.log(data);
+    console.log(data + ' ' + new Date());
     if (data === 'x') {            // if the client sends 'exit',
     console.log('closing client');
     client.end();                  // disconnect the client
