@@ -46,6 +46,7 @@ function listenForClients(client) {
   // handle any network errors:
   client.on('error', function (err) {
     console.error('Network connection error', err);
+    client.end();
   });
 });
 
@@ -54,7 +55,9 @@ function listenForClients(client) {
 stdin.on('data', function(data) {
   data = data.trim();                 // trim any whitespace from the string
   if (data === 'c') {
-    console.log(clients);             // list the client array
+    for (c in clients) {
+      console.log(clients[c].remoteAddress);
+    }             // list the client array
   } else {                            // otherwise, broadcast the message to all clients
     for (thisClient in clients) {     // iterate over the client array
       clients[thisClient].write(data);// send the message to each client
