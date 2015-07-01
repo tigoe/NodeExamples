@@ -49,7 +49,7 @@ function listenForClients(client) {
     client.end();
   });
 
-  function checkCLientList() {
+  function checkClientList() {
     log('cleaning up client list');
       for (c in clients) {
         if (typeof(client[c]) === 'undefined') {
