@@ -23,5 +23,6 @@ void loop() {
     int ledState = Serial.parseInt();
     // set  the built-in LED using the number (0 - 255):
     analogWrite(9, ledState);
+    Serial.println(ledState);
   }
 }

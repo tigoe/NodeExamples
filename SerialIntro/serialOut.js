@@ -17,7 +17,7 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 
 created 17 June 2014
-modified 10 Jun 2015
+modified 30 Aug 2015
 by Tom Igoe
 
 */
@@ -25,13 +25,13 @@ by Tom Igoe
 
 // serial port initialization:
 var serialport = require('serialport'),			// include the serialport library
-SerialPort  = serialport.SerialPort,			// make a local instance of serial
-portName = process.argv[2],								// get the port name from the command line
-portConfig = {
-	baudRate: 9600,
-	// call myPort.on('data') when a newline is received:
-	parser: serialport.parsers.readline('\n')
-};
+	SerialPort  = serialport.SerialPort,			// make a local instance of serial
+	portName = process.argv[2],								// get the port name from the command line
+	portConfig = {
+		baudRate: 9600,
+		// call myPort.on('data') when a newline is received:
+		parser: serialport.parsers.readline('\n')
+	};
 
 // open the serial port:
 var myPort = new SerialPort(portName, portConfig);
@@ -46,7 +46,7 @@ function openPort() {
 	console.log('baud rate: ' + myPort.options.baudRate);
 
 	// since you only send data when the port is open, this function
-	// is local to the listen() function:
+	// is local to the openPort() function:
 	function sendData() {
 		// convert the value to an ASCII string before sending it:
 		myPort.write(brightness.toString());
@@ -58,8 +58,8 @@ function openPort() {
 			brightness = 0;
 		}
 	}
-	// set an interval to update the brightness 10 times per second:
-	setInterval(sendData, 100);
+	// set an interval to update the brightness 2 times per second:
+	setInterval(sendData, 500);
 }
 
 function closePort() {
