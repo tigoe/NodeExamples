@@ -11,6 +11,7 @@
 var express = require('express');			// include express.js
 var app = express();								// a local instance of it
 
+// serve static pages from public/ directory:
 app.use('/',express.static('public'));
 
 // this runs after the server successfully starts:

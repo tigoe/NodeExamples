@@ -1,9 +1,9 @@
 /*
 	Simple HTTP/HTTPS request example
-	
+
 	created 9 Jan 2015
 	by Tom Igoe
-	based on node.js and stackoverflow examples	
+	based on node.js and stackoverflow examples
 */
 
 // you can do this with http or https:
@@ -15,9 +15,9 @@ var https = require('https');
  https://dweet.io:443/get/latest/dweet/for/equable-men
 */
 var options = {
-  host: 'dweet.io',	
+  host: 'dweet.io',
   port: 443,
-  path: '/get/latest/dweet/for/equable-men'
+  path: '/get/latest/dweet/for/subsequent-cook'
 };
 
 /*

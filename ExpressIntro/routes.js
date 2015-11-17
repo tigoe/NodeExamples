@@ -34,7 +34,7 @@ app.get('/name/', function (request, response) {
 	var name = names[whichName];
 	content += name;
 	content += '\n';		// add a newline at the end of the content
-	response.send(content);	// send it back to the client
+	response.send('<h1>' + content + '</h1>');	// send it back to the client
 	response.end();			// close the connection
 });
 

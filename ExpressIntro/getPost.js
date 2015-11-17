@@ -2,7 +2,7 @@
 	Express.js GET/POST example
 	Shows how to get the parameters of a GET vs a POST request
 	in Express.js 4.0
-	
+
 	created 10 Feb 2015
 	by Tom Igoe
 */
@@ -13,7 +13,7 @@ var bodyParser = require('body-parser');	// include body-parser
 
 // you need a couple of parsers for the body of a POST request:
 app.use(bodyParser.json()); 						// for  application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded()); // for application/x-www-form-urlencoded
 
 // this runs after the server successfully starts:
 function serverStart() {
@@ -24,7 +24,7 @@ function serverStart() {
 // this is called by both GET and POST handlers,
 // to format a response to the request:
 function formatResponse(thisContent) {
-	var result = 'You sent me:' + 
+	var result = 'You sent me:' +
   			'\n name: ' + thisContent.name +
   			'\n age: ' + thisContent.age + '\n';
   	return result;
@@ -38,7 +38,7 @@ app.get('/', function (request, response) {
 	// for formatting:
 	var content = formatResponse(request.query);
 	console.log(content);
-	
+
 	// send the response:
 	response.send(content);
 	response.end();
@@ -52,12 +52,11 @@ app.post('/', function (request, response) {
 	// for formatting:
 	var content = formatResponse(request.body);
 	console.log(content);
- 	
-	// send the response: 
+
+	// send the response:
 	response.send(content);
 	response.end();
 });
 
 // start the server:
 var server = app.listen(8080, serverStart);
-
