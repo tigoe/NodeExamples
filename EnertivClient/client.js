@@ -6,11 +6,14 @@
 
   You'll need to add a file, cred.js, to the same directory as this file,
   with the following in it:
-  var username = your_username,
-    password = your_password,
-  clientID = your_client_id,
-  clientSecret = 'your_client_secret;
 
+  var creds = {
+      username : your_username,
+      password : your_password,
+      clientID : your_client_id,
+      clientSecret : your_client_secret
+  }
+  module.exports = creds;
 
   to call it from the command line:
   node client.js
@@ -34,11 +37,11 @@ var clientData;
  fill in your client_id and client_secret here:
 */
 var loginData = querystring.stringify({
-    'client_id': clientID,
-    'client_secret': clientSecret,
+    'client_id': cred.clientID,
+    'client_secret': cred.clientSecret,
     'grant_type': 'password',
-    'username': username,
-    'password': password
+    'username': cred.username,
+    'password': cred.password
   });
 
 // set up the HTTPS request options. You'll modify and
