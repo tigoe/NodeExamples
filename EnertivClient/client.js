@@ -4,8 +4,16 @@
   then makes first API request with the token.
   This is a quick-and-dirty solution, and should be improved upon.
 
+  You'll need to add a file, cred.js, to the same directory as this file,
+  with the following in it:
+  var username = your_username,
+    password = your_password,  
+  clientID = your_client_id,
+  clientSecret = 'your_client_secret;
+
+
   to call it from the command line:
-  node client.js username password
+  node client.js
 
   TODO:
     * Simplify with async.js or q.js or an oauth2 library
@@ -16,9 +24,7 @@
 
 var https = require('https');
 var querystring = require('querystring');
-
-var username = process.argv[2],   // get the username from the command line
-  password = process.argv[3];     // get the password from the command line
+var cred = require('./cred.js');
 
 var clientData;
 
@@ -27,8 +33,8 @@ var clientData;
  fill in your client_id and client_secret here:
 */
 var loginData = querystring.stringify({
-    'client_id': 'eeeee',
-    'client_secret': 'eeeee',
+    'client_id': clientID,
+    'client_secret': clientSecret,
     'grant_type': 'password',
     'username': username,
     'password': password
