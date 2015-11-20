@@ -7,7 +7,7 @@
   You'll need to add a file, cred.js, to the same directory as this file,
   with the following in it:
   var username = your_username,
-    password = your_password,  
+    password = your_password,
   clientID = your_client_id,
   clientSecret = 'your_client_secret;
 
@@ -19,6 +19,7 @@
     * Simplify with async.js or q.js or an oauth2 library
 
 	created 25 Feb 2015
+  updated 20 Nov 2015
 	by Tom Igoe
 */
 
