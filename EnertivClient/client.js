@@ -1,5 +1,5 @@
 /*
-	HTTP/HTTPS request example to Enertiv
+  HTTP/HTTPS request example to Enertiv
   Does basic Oauth2 exchange to get access token
   then makes first API request with the token.
   This is a quick-and-dirty solution, and should be improved upon.
@@ -18,7 +18,7 @@
   to call it from the command line:
   node client.js
 
-	created 25 Feb 2015 by Tom Igoe
+  created 25 Feb 2015 by Tom Igoe
   updated 28 Nov 2015 by John Farrell
 
 */

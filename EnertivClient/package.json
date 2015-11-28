@@ -1,7 +1,7 @@
 {
   "name": "enertivclient",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example client for Enertiv API",
   "main": "client.js",
   "dependencies": {
     "request": "^2.67.0"
