@@ -18,91 +18,61 @@
   to call it from the command line:
   node client.js
 
-  TODO:
-    * Simplify with async.js or q.js or an oauth2 library
+	created 25 Feb 2015 by Tom Igoe
+  updated 28 Nov 2015 by John Farrell
 
-	created 25 Feb 2015
-  updated 20 Nov 2015
-	by Tom Igoe
 */
 
-var https = require('https');
 var querystring = require('querystring');
+var request = require('request');
+var rp = require('request-promise');
 var cred = require('./cred.js');
 
-var clientData;
-
-/*
- set up the options for the login.
- fill in your client_id and client_secret here:
-*/
-var loginData = querystring.stringify({
-    'client_id': cred.clientID,
-    'client_secret': cred.clientSecret,
-    'grant_type': 'password',
-    'username': cred.username,
-    'password': cred.password
-  });
-
-// set up the HTTPS request options. You'll modify and
-// reuse this for subsequent calls:
-var options = {
-  rejectUnauthorized: false,
-  method: 'POST',
-  host: 'api.enertiv.com',
-  port: 443,
-  path: '/oauth2/access_token/',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length': loginData.length
-  }
+// Grab login data from our cred.js file 
+var loginData = {
+  'host': 'https://api.enertiv.com',
+  'client_id': cred.clientID,
+  'client_secret': cred.clientSecret,
+  'grant_type': 'password',
+  'username': cred.username,
+  'password': cred.password
 };
 
-/*
-	the callback function to be run when the response comes in.
-	this callback assumes a chunked response, with several 'data'
-	events and one final 'end' response.
-*/
-function saveToken(response) {
-  var result = '';		// string to hold the response
-  var accessToken;
-  // as each chunk comes in, add it to the result string:
-  response.on('data', function (data) {
-    result += data;
-  });
+// Make a callback function to handle the server response
+// At the end of the function, we call GetClientInfo
+// We are passing a new path for the URI and our new access token
+function callback(error, response, body) {
+  if (error) {console.log(error)}
+    else if (!error && response.statusCode == 200) {
+      var info = JSON.parse(body);
+      var token = info.access_token;
+      getClientInfo('/api/client/', token);
+    }
+}
 
-  // when the final chunk comes in, print it out:
-  response.on('end', function () {
-    result = JSON.parse(result);
-    accessToken = result.access_token;
-    getClientInfo('/api/client/', accessToken);
+// Make a POST request, establishing headers, URI and body
+// Run our callback function as the second argument to the request
+var req = request.post({
+  headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+      },
+    uri: loginData.host + '/oauth2/access_token/',
+    body: querystring.stringify(loginData)
+  },
+  callback
+);
+
+// Function to check your account client information
+function getClientInfo(path, token){
+  request({
+    headers:{
+      'Authorization': 'Bearer ' + token
+      },
+    uri: loginData.host + path
+    },
+  function (error, response, body){
+    console.log(error);
+    console.log(body);
   });
 }
 
-
-function getClientInfo(path, token) {
-  options.path = path;
-  options.method = 'GET';
-  options.headers = {
-    'Authorization': 'Bearer ' + token
-  }
-  request = https.get(options, function (response) { // make the API call
-    var result = '';
-    // as each chunk comes in, add it to the result string:
-    response.on('data', function (data) {
-      result += data;
-    });
-
-    // when the final chunk comes in, print it out:
-    response.on('end', function () {
-      result = JSON.parse(result);
-      clientData = result;
-      console.log(clientData);
-    });
-  });
-}
-
-// make the login request:
-var request = https.request(options, saveToken);	// start it
-  request.write(loginData);                       // add  body of  POST request
-  request.end();												          // end it
