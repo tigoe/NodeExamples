@@ -23,7 +23,7 @@
 var https = require('https');
 var querystring = require('querystring');
 var cred = require('./cred.js');
-
+var clientData;
 // Bring in login information from our cred file
 var loginData = querystring.stringify({
     'client_id': cred.clientID,
@@ -98,7 +98,9 @@ var enertiv = function(){
 
       // when the final chunk comes in, print it out:
       response.on('end', function () {
-        console.log(result);
+        result = JSON.parse(result);
+        clientData = result[0];
+        console.log(clientData);
       });
     });
   };
