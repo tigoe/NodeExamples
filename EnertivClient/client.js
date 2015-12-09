@@ -3,7 +3,6 @@
   Does basic Oauth2 exchange to get access token
   then makes first API request with the token.
   This is a quick-and-dirty solution, and should be improved upon.
-
   You'll need to add a file, cred.js, to the same directory as this file,
   with the following in it:
 
@@ -19,60 +18,90 @@
   node client.js
 
   created 25 Feb 2015 by Tom Igoe
-  updated 28 Nov 2015 by John Farrell
-
+  updated 08 Dec 2015 by John Farrell
 */
-
+var https = require('https');
 var querystring = require('querystring');
-var request = require('request');
-var rp = require('request-promise');
 var cred = require('./cred.js');
 
-// Grab login data from our cred.js file 
-var loginData = {
-  'host': 'https://api.enertiv.com',
-  'client_id': cred.clientID,
-  'client_secret': cred.clientSecret,
-  'grant_type': 'password',
-  'username': cred.username,
-  'password': cred.password
+// Bring in login information from our cred file
+var loginData = querystring.stringify({
+    'client_id': cred.clientID,
+    'client_secret': cred.clientSecret,
+    'grant_type': 'password',
+    'username': cred.username,
+    'password': cred.password
+  });
+
+// set up the HTTPS request options. You'll modify and
+// reuse this for subsequent calls:
+var options = {
+  rejectUnauthorized: false,
+  method: 'POST',
+  host: 'api.enertiv.com',
+  port: 443,
+  path: '/oauth2/access_token/',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': loginData.length
+  }
 };
 
-// Make a callback function to handle the server response
-// At the end of the function, we call GetClientInfo
-// We are passing a new path for the URI and our new access token
-function callback(error, response, body) {
-  if (error) {console.log(error)}
-    else if (!error && response.statusCode == 200) {
-      var info = JSON.parse(body);
-      var token = info.access_token;
-      getClientInfo('/api/client/', token);
-    }
-}
 
-// Make a POST request, establishing headers, URI and body
-// Run our callback function as the second argument to the request
-var req = request.post({
-  headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-      },
-    uri: loginData.host + '/oauth2/access_token/',
-    body: querystring.stringify(loginData)
-  },
-  callback
-);
+var enertiv = function(){
 
-// Function to check your account client information
-function getClientInfo(path, token){
-  request({
-    headers:{
+  var path;
+  var self = this;
+
+  // Authenticate with Enertiv API
+  this.login = function(apiPath){
+    path = apiPath;   // set path argument to use later
+    var request = https.request(options, self.saveToken);  // start it
+      request.write(loginData);                        // add  body of  POST request
+      request.end();   
+  };
+
+  // Parse response and save auth token
+  // Pass that token to further API calls
+  this.saveToken = function(response){
+    var result = '';    // string to hold the response
+    var accessToken;
+    // as each chunk comes in, add it to the result string:
+    response.on('data', function (data) {
+      result += data;
+    });
+
+    // when the final chunk comes in, print it out:
+    response.on('end', function () {
+      result = JSON.parse(result);
+      accessToken = result.access_token;
+      self.apiCall(accessToken);  
+    });
+  };
+
+  // Generic function for API calls using auth token
+  this.apiCall = function(token){
+    // Change to a GET request
+    options.method = 'GET';
+    // Set our path to the original argument
+    options.path = path;
+    // Change authorization header to include our token
+    options.headers = {
       'Authorization': 'Bearer ' + token
-      },
-    uri: loginData.host + path
-    },
-  function (error, response, body){
-    console.log(error);
-    console.log(body);
-  });
+    }
+    request = https.get(options, function (response) { // make the API call
+      var result = '';
+      // as each chunk comes in, add it to the result string:
+      response.on('data', function (data) {
+        result += data;
+      });
+
+      // when the final chunk comes in, print it out:
+      response.on('end', function () {
+        console.log(result);
+      });
+    });
+  };
 }
 
+module.exports = enertiv;
