@@ -101,6 +101,7 @@ var enertiv = function(){
       response.on('end', function () {
         result = JSON.parse(result);
         clientData = result[0];
+        //console.log(clientData.uuid);
         callback(clientData);
       });
     });
