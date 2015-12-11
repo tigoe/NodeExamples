@@ -54,7 +54,8 @@ var enertiv = function(){
   var self = this;
 
   // Authenticate with Enertiv API
-  this.login = function(apiPath){
+  this.login = function(apiPath, cb){
+    callback = cb;
     path = apiPath;   // set path argument to use later
     var request = https.request(options, self.saveToken);  // start it
       request.write(loginData);                        // add  body of  POST request
@@ -100,7 +101,7 @@ var enertiv = function(){
       response.on('end', function () {
         result = JSON.parse(result);
         clientData = result[0];
-        console.log(clientData);
+        callback(clientData);
       });
     });
   };
