@@ -18,8 +18,10 @@
   node client.js
 
   created 25 Feb 2015 by Tom Igoe
-  updated 08 Dec 2015 by John Farrell
+  updated 06 Jan 2016 by John Farrell
 */
+
+
 var https = require('https');
 var querystring = require('querystring');
 var cred = require('./cred.js');
@@ -48,7 +50,7 @@ var options = {
   }
 };
 
-
+// Module
 var enertiv = function(){
 
   var path;
@@ -57,6 +59,7 @@ var enertiv = function(){
   var accessToken;
 
   // Authenticate with Enertiv API
+  // Login runs callback to saveToken
   this.login = function(cb){
     callback = cb;
     var request = https.request(options, self.saveToken);  // start it
@@ -67,24 +70,23 @@ var enertiv = function(){
   // Parse response and save auth token
   // Pass that token to further API calls
   this.saveToken = function(response){
-    var result = '';    // string to hold the response
-    // as each chunk comes in, add it to the result string:
+    var result = '';    // String to hold the response
+    // As each chunk comes in, add it to the result string:
     response.on('data', function (data) {
       result += data;
     });
 
-    // when the final chunk comes in, print it out:
+    // When the final chunk comes in, grab the access token
+    // Then run our callback function
     response.on('end', function () {
-      //console.log("Result: " + result);
       result = JSON.parse(result);
       accessToken = result.access_token;
       console.log("token: " + accessToken);
-      //self.apiCall(accessToken);
       callback();  
     });
   };
 
-  // Generic function for API calls using auth token
+  // Generic function for API calls using access token
   this.apiCall = function (path, cb){
     callback = cb;
     // Change to a GET request
@@ -98,14 +100,16 @@ var enertiv = function(){
     console.log("token: " + accessToken);
     console.log("path: " + options.path);
 
-    request = https.get(options, function (response) { // make the API call
+    // Make the API call
+    request = https.get(options, function (response) { 
       var result = '';
-      // as each chunk comes in, add it to the result string:
+      // As each chunk comes in, add it to the result string:
       response.on('data', function (data) {
         result += data;
       });
 
-      // when the final chunk comes in, print it out:
+      // When the final chunk comes in, print it out
+      // Then run our callback function
       response.on('end', function () {
         console.log("result: " + result);
         callback(result);
@@ -118,74 +122,5 @@ module.exports = enertiv;
 
 
 
-
-
-
-
-// var enertiv = function(){
-
-//   var path;
-//   var self = this;
-//   var callback;
-
-//   // Authenticate with Enertiv API
-//   this.login = function(apiPath, cb){
-//     callback = cb;
-//     path = apiPath;   // set path argument to use later
-//     var request = https.request(options, self.saveToken);  // start it
-//       request.write(loginData);                        // add  body of  POST request
-//       request.end();   
-//   };
-
-//   // Parse response and save auth token
-//   // Pass that token to further API calls
-//   this.saveToken = function(response){
-//     var result = '';    // string to hold the response
-//     var accessToken;
-//     // as each chunk comes in, add it to the result string:
-//     response.on('data', function (data) {
-//       result += data;
-//     });
-
-//     // when the final chunk comes in, print it out:
-//     response.on('end', function () {
-//       //console.log("Result: " + result);
-//       result = JSON.parse(result);
-//       accessToken = result.access_token;
-//       console.log("token: " + accessToken);
-//       self.apiCall(accessToken);  
-//     });
-//   };
-
-//   // Generic function for API calls using auth token
-//   this.apiCall = function(token){
-//     // Change to a GET request
-//     options.method = 'GET';
-//     // Set our path to the original argument
-//     options.path = path;
-//     console.log(options.path);
-//     // Change authorization header to include our token
-//     options.headers = {
-//       'Authorization': 'Bearer ' + token
-//     }
-//     console.log(options.headers);
-//     request = https.get(options, function (response) { // make the API call
-//       var result = '';
-//       // as each chunk comes in, add it to the result string:
-//       response.on('data', function (data) {
-//         result += data;
-//         //console.log('result: ' + result);
-//       });
-
-//       // when the final chunk comes in, print it out:
-//       response.on('end', function () {
-//         result = JSON.parse(result);
-//         clientData = result[0];
-//         console.log('api call happens');
-//         callback(clientData);
-//       });
-//     });
-//   };
-// }
 
 
