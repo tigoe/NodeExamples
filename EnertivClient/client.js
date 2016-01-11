@@ -81,24 +81,19 @@ var enertiv = function(){
     response.on('end', function () {
       result = JSON.parse(result);
       accessToken = result.access_token;
-      console.log("token: " + accessToken);
       callback();  
     });
   };
 
   // Generic function for API calls using access token
   this.apiCall = function (path, cb){
-    callback = cb;
-    // Change to a GET request
-    options.method = 'GET';
-    // Set our path to the argument
-    options.path = path;
-    // Change authorization header to include our token
-    options.headers = {
+
+    callback = cb;    
+    options.method = 'GET';  // Change to a GET request
+    options.path = path;     // Set our path to the argument
+    options.headers = {      // Change authorization header to include our token
       'Authorization': 'Bearer ' + accessToken
     }
-    console.log("token: " + accessToken);
-    console.log("path: " + options.path);
 
     // Make the API call
     request = https.get(options, function (response) { 
