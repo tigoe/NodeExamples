@@ -17,7 +17,7 @@ var server = app.listen(3000, function () {
 // Route to login - MUST DO FIRST
 app.get('/login', function (req,res){
 	var data = c.login(function (data){
-		return res.send("YOU ARE AUTHENTICATED");
+		res.send("YOU ARE AUTHENTICATED");
 	});
 });
 
@@ -25,7 +25,8 @@ app.get('/login', function (req,res){
 app.get('/client', function (req,res){
 	var apiClient = c.apiCall('/api/client/', function (apiClient){
 		var clientInfo = JSON.parse(apiClient);
-		return res.send(clientInfo[0]);
+		//res.send(clientInfo[0]);
+		console.log(clientInfo[0]);
 	});
 });
 
@@ -35,22 +36,52 @@ app.get('/top10', function (req,res){
 		var clientInfo = c.apiCall('/api/client/', function (clientInfo){
 			var clientjson = JSON.parse(clientInfo);
 			var clientid = clientjson[0].uuid;
-			return res.redirect('/top10/' + clientid);
+			res.redirect('/top10/' + clientid);
 	});
 });
 
 
-app.get('/top10/:id', function (req,res){
-	clientid = req.params.id;
+app.get('/top10/:ID', function (req,res){
+	var client = req.params.ID;
 	// Set the date range you want to examine
 	var start = encodeURIComponent('2015-01-01 00:00:00Z');
 	var end = encodeURIComponent('2015-09-01 00:00:00Z')
 	
-	var top10 = c.apiCall('/api/client/'+clientid+'/top_consumers/?count=10&fromTime='+start+'&toTime='+end, function (top10){
-		return res.send(JSON.parse(top10));
+	var top10 = c.apiCall('/api/client/'+client+'/top_consumers/?count=10&fromTime='+start+'&toTime='+end, function (top10){
+		//res.send(JSON.parse(top10));
+		console.log(JSON.parse(top10));
 	});
 });
 		
+
+
+// Get energy and cost data by location
+app.get('/energy', function (req,res){
+	var clientInfo = c.apiCall('/api/client/', function (clientInfo){
+		var clientjson = JSON.parse(clientInfo);
+		var locID = clientjson[0].locations[0];
+		res.redirect('/energy/'+locID);
+	});
+});
+
+app.get('/energy/:locationID', function (req,res){
+	var location = req.params.locationID;
+	var startdate = encodeURIComponent('2015-01-01 00:00:00Z');
+	var enddate = encodeURIComponent('2015-09-01 00:00:00Z')
+	var interval = 'month';
+	var energyData = c.apiCall('/api/location/'+location+'/data/?fromTime='+startdate+'&toTime='+enddate+'&interval='+interval+'&cost=true', function (energyData){
+	    //res.send(JSON.parse(energyData));
+		console.log(JSON.parse(energyData));
+	});
+});
+
+
+
+
+
+
+
+
 
 
 

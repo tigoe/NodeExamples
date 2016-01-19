@@ -106,7 +106,7 @@ var enertiv = function(){
       // When the final chunk comes in, print it out
       // Then run our callback function
       response.on('end', function () {
-        console.log("result: " + result);
+        //console.log("result: " + result);
         callback(result);
       });
     });
