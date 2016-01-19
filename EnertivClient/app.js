@@ -14,21 +14,29 @@ var server = app.listen(3000, function () {
 	console.log('app listening at http://%s:%s', host, port);
 });
 
-// Route to login - MUST DO FIRST
+//////////////////////////////////////////
+//  Route to login - MUST DO FIRST
+//////////////////////////////////////////
 app.get('/login', function (req,res){
 	var data = c.login(function (data){
+		console.log("AUTHENTICATED");
 		res.send("YOU ARE AUTHENTICATED");
+		res.end();
 	});
 });
+
 
 // Example showing client information
 app.get('/client', function (req,res){
 	var apiClient = c.apiCall('/api/client/', function (apiClient){
 		var clientInfo = JSON.parse(apiClient);
-		//res.send(clientInfo[0]);
 		console.log(clientInfo[0]);
+		res.send(clientInfo[0]);
+		res.end(0);
 	});
 });
+
+
 
 // Example showing top 10 energy consumers
 // Note the redirect to /top10/:id below
@@ -48,8 +56,9 @@ app.get('/top10/:ID', function (req,res){
 	var end = encodeURIComponent('2015-09-01 00:00:00Z')
 	
 	var top10 = c.apiCall('/api/client/'+client+'/top_consumers/?count=10&fromTime='+start+'&toTime='+end, function (top10){
-		//res.send(JSON.parse(top10));
 		console.log(JSON.parse(top10));
+		res.send(JSON.parse(top10));
+		res.end();
 	});
 });
 		
@@ -70,8 +79,9 @@ app.get('/energy/:locationID', function (req,res){
 	var enddate = encodeURIComponent('2015-09-01 00:00:00Z')
 	var interval = 'month';
 	var energyData = c.apiCall('/api/location/'+location+'/data/?fromTime='+startdate+'&toTime='+enddate+'&interval='+interval+'&cost=true', function (energyData){
-	    //res.send(JSON.parse(energyData));
-		console.log(JSON.parse(energyData));
+	    console.log(JSON.parse(energyData));
+	    res.send(JSON.parse(energyData));
+		res.end();
 	});
 });
 
