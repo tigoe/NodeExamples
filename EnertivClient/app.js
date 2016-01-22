@@ -14,6 +14,9 @@ var server = app.listen(3000, function () {
 	console.log('app listening at http://%s:%s', host, port);
 });
 
+
+var clientData = {};
+
 //////////////////////////////////////////
 //  Route to login - MUST DO FIRST
 //////////////////////////////////////////
@@ -85,8 +88,7 @@ app.get('/energy/:locationID', function (req,res){
 	});
 });
 
-TF-ilfSepMQJEfvIobTCxYV85mhSGIGuuR_fCKII
-3m6h9pRxra0-QJvrtjRJNlvMsDmapH57FEeQihea
+
 
 
 
