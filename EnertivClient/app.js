@@ -15,14 +15,6 @@ var server = app.listen(3000, function () {
 });
 
 
-<<<<<<< HEAD
-var clientData = {};
-
-//////////////////////////////////////////
-//  Route to login - MUST DO FIRST
-//////////////////////////////////////////
-app.get('/login', function (req,res){
-=======
 /*
 	*
 	*		Important Info
@@ -38,7 +30,6 @@ var clientData = {};
 
 // Hit this first to authenticate
 app.get('/login', function (req,res,next){
->>>>>>> newApp
 	var data = c.login(function (data){
 		console.log("AUTHENTICATED");
 		res.send("YOU ARE AUTHENTICATED");
@@ -92,18 +83,5 @@ app.get('/energy', function (req,res,next){
 	});
 });
 
-<<<<<<< HEAD
 
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> newApp
 
