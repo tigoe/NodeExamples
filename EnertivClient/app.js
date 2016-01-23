@@ -4,7 +4,7 @@ var app = express();
 var c = new client;
 
 
-// Examples using Enertiv node module
+// Examples using Enertiv node module with Express
 // See https://api.enertiv.com/docs/#!/api/ for available endpoints
 
 
@@ -14,10 +14,22 @@ var server = app.listen(3000, function () {
 	console.log('app listening at http://%s:%s', host, port);
 });
 
-//////////////////////////////////////////
-//  Route to login - MUST DO FIRST
-//////////////////////////////////////////
-app.get('/login', function (req,res){
+
+/*
+	*
+	*		Important Info
+	*
+	*		Must hit '/login' first to authenticate	
+	*			- Follow setup in 'client.js'
+	*		Most API endpoints use client info (client/location uuid)
+	*		So, use '/client' to save that info for later use
+	*
+*/
+
+var clientData = {};
+
+// Hit this first to authenticate
+app.get('/login', function (req,res,next){
 	var data = c.login(function (data){
 		console.log("AUTHENTICATED");
 		res.send("YOU ARE AUTHENTICATED");
@@ -26,55 +38,41 @@ app.get('/login', function (req,res){
 });
 
 
-// Example showing client information
+// Returns client information, saves the important bits for later
 app.get('/client', function (req,res){
 	var apiClient = c.apiCall('/api/client/', function (apiClient){
 		var clientInfo = JSON.parse(apiClient);
 		console.log(clientInfo[0]);
+		clientData.uuid = clientInfo[0].uuid;
+		clientData.locationID = clientInfo[0].locations[0];
 		res.send(clientInfo[0]);
-		res.end(0);
+		res.end();
 	});
 });
 
 
 
 // Example showing top 10 energy consumers
-// Note the redirect to /top10/:id below
-app.get('/top10', function (req,res){
-		var clientInfo = c.apiCall('/api/client/', function (clientInfo){
-			var clientjson = JSON.parse(clientInfo);
-			var clientid = clientjson[0].uuid;
-			res.redirect('/top10/' + clientid);
-	});
-});
-
-
-app.get('/top10/:ID', function (req,res){
-	var client = req.params.ID;
+// Uses the client uuid we saved from '/client'
+app.get('/top10', function (req,res,next){
 	// Set the date range you want to examine
 	var start = encodeURIComponent('2015-01-01 00:00:00Z');
-	var end = encodeURIComponent('2015-09-01 00:00:00Z')
-	
+	var end = encodeURIComponent('2015-09-01 00:00:00Z');
+	var client = clientData.uuid;
+
 	var top10 = c.apiCall('/api/client/'+client+'/top_consumers/?count=10&fromTime='+start+'&toTime='+end, function (top10){
 		console.log(JSON.parse(top10));
 		res.send(JSON.parse(top10));
 		res.end();
-	});
+
+	})
 });
-		
 
 
 // Get energy and cost data by location
-app.get('/energy', function (req,res){
-	var clientInfo = c.apiCall('/api/client/', function (clientInfo){
-		var clientjson = JSON.parse(clientInfo);
-		var locID = clientjson[0].locations[0];
-		res.redirect('/energy/'+locID);
-	});
-});
-
-app.get('/energy/:locationID', function (req,res){
-	var location = req.params.locationID;
+// Uses the location uuid we saved from '/client'
+app.get('/energy', function (req,res,next){
+	var location = clientData.locationID;
 	var startdate = encodeURIComponent('2015-01-01 00:00:00Z');
 	var enddate = encodeURIComponent('2015-09-01 00:00:00Z')
 	var interval = 'month';
@@ -84,17 +82,5 @@ app.get('/energy/:locationID', function (req,res){
 		res.end();
 	});
 });
-
-TF-ilfSepMQJEfvIobTCxYV85mhSGIGuuR_fCKII
-3m6h9pRxra0-QJvrtjRJNlvMsDmapH57FEeQihea
-
-
-
-
-
-
-
-
-
 
 
