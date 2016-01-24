@@ -14,9 +14,6 @@
   }
   module.exports = creds;
 
-  to call it from the command line:
-  node client.js
-
   created 25 Feb 2015 by Tom Igoe
   updated 06 Jan 2016 by John Farrell
 */
@@ -52,8 +49,6 @@ var options = {
 
 // Module
 var enertiv = function(){
-
-  var path;
   var self = this;
   var callback;
   var accessToken;
