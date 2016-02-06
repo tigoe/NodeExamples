@@ -42,8 +42,7 @@ app.get('/login', function (req,res,next){
 app.get('/client', function (req,res){
 	var apiClient = c.apiCall('/api/client/', function (apiClient){
 		var clientInfo = JSON.parse(apiClient);
-		console.log(clientInfo[0]);
-		clientData.uuid = clientInfo[0].uuid;
+		clientData.uuid = clientInfo[0].id;
 		clientData.locationID = clientInfo[0].locations[0];
 		res.send(clientInfo[0]);
 		res.end();
@@ -54,7 +53,7 @@ app.get('/client', function (req,res){
 
 // Example showing top 10 energy consumers
 // Uses the client uuid we saved from '/client'
-app.get('/top10', function (req,res,next){
+app.get('/top10', function (req,res){
 	// Set the date range you want to examine
 	var start = encodeURIComponent('2015-01-01 00:00:00Z');
 	var end = encodeURIComponent('2015-09-01 00:00:00Z');
@@ -71,11 +70,12 @@ app.get('/top10', function (req,res,next){
 
 // Get energy and cost data by location
 // Uses the location uuid we saved from '/client'
-app.get('/energy', function (req,res,next){
+app.get('/energy', function (req,res){
 	var location = clientData.locationID;
 	var startdate = encodeURIComponent('2015-01-01 00:00:00Z');
 	var enddate = encodeURIComponent('2015-09-01 00:00:00Z')
 	var interval = 'month';
+
 	var energyData = c.apiCall('/api/location/'+location+'/data/?fromTime='+startdate+'&toTime='+enddate+'&interval='+interval+'&cost=true', function (energyData){
 	    console.log(JSON.parse(energyData));
 	    res.send(JSON.parse(energyData));
