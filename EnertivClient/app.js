@@ -27,14 +27,18 @@ var server = app.listen(3000, function () {
 */
 
 var clientData = {};
+var topData = [];
+var energyData = [];
 
 // Hit this first to authenticate
-app.get('/login', function (req,res,next){
+app.get('/login', function (req,res){
 	var data = c.login(function (data){
-		console.log("AUTHENTICATED");
-		res.send("YOU ARE AUTHENTICATED");
-		res.end();
+		console.log("YOU ARE AUTHENTICATED");
+		// res.write("YOU ARE AUTHENTICATED");
+		// res.end();
+		res.send("AUTH");
 	});
+	
 });
 
 
@@ -43,10 +47,11 @@ app.get('/client', function (req,res){
 	var apiClient = c.apiCall('/api/client/', function (apiClient){
 		var clientInfo = JSON.parse(apiClient);
 		clientData.uuid = clientInfo[0].id;
-		clientData.locationID = clientInfo[0].locations[0];
-		res.send(clientInfo[0]);
-		res.end();
+	    clientData.locationID = clientInfo[0].locations[0];
+		console.log(clientInfo[0]);
+		res.send(clientData);
 	});
+	
 });
 
 
@@ -61,10 +66,9 @@ app.get('/top10', function (req,res){
 
 	var top10 = c.apiCall('/api/client/'+client+'/top_consumers/?count=10&fromTime='+start+'&toTime='+end, function (top10){
 		console.log(JSON.parse(top10));
-		res.send(JSON.parse(top10));
-		res.end();
-
-	})
+		topData.push(JSON.parse(top10));
+		res.send(topData);
+	});
 });
 
 
@@ -76,10 +80,10 @@ app.get('/energy', function (req,res){
 	var enddate = encodeURIComponent('2015-09-01 00:00:00Z')
 	var interval = 'month';
 
-	var energyData = c.apiCall('/api/location/'+location+'/data/?fromTime='+startdate+'&toTime='+enddate+'&interval='+interval+'&cost=true', function (energyData){
-	    console.log(JSON.parse(energyData));
-	    res.send(JSON.parse(energyData));
-		res.end();
+	var energy = c.apiCall('/api/location/'+location+'/data/?fromTime='+startdate+'&toTime='+enddate+'&interval='+interval+'&cost=true', function (energy){
+	    console.log(JSON.parse(energy));
+	    energyData.push(JSON.parse(energy));
+	    res.send(energyData);
 	});
 });
 

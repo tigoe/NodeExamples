@@ -98,6 +98,9 @@ var enertiv = function(){
         result += data;
       });
 
+      request.on('error', function (err){
+        console.log(err);
+      });
       // When the final chunk comes in, print it out
       // Then run our callback function
       response.on('end', function () {
