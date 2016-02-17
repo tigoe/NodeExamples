@@ -1,0 +1,16 @@
+{
+  "name": "enertiv_api",
+  "version": "1.0.0",
+  "description": "example usage for the Enertiv API",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "path": "^0.12.7"
+  }
+}
