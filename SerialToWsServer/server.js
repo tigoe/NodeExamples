@@ -8,7 +8,8 @@ var	portConfig = {                          // serial port config
 
 var express = require('express');           // the express library
 var http = require("http");                 // the http library
-var WebSocketServer = require('ws').Server; // the ws library's Server class
+var WebSocket = require('ws');              // the ws library
+var WebSocketServer = WebSocket.Server;     // the ws library's Server class
 
 var server = express();                     // the express server
 var httpServer = http.createServer(server); // an http server
@@ -44,7 +45,10 @@ function connectClient(newClient) {
 // broadcast data to connected webSocket clients:
 function broadcast(data) {
   for (client in wss.clients) {
+    var thisClient = wss.clients[client];
+    if (thisClient.readyState === 1) {    // check if client is open (1 = webSocket.OPEN)
       wss.clients[client].send(data);
+    }
   }
 }
 // open the serial port:
