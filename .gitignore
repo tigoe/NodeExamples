@@ -8,3 +8,4 @@ node-hue-api/node_modules/*
 ExpressIntro/node_modules/*
 SerialToBrowser/node_modules/*
 EnertivClient/cred.js
+SerialToWsServer/node_modules/*
