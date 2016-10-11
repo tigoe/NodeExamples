@@ -6,8 +6,9 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 */
 
-var serialport = require("serialport");
 
+var serialport = require("serialport");
+var myName = "unknown";
 // list serial ports:
 serialport.list(listPorts);
 
