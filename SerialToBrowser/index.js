@@ -21,13 +21,11 @@ by Tom Igoe
 var express = require('express');				// include express.js
 var app = express();								  	// a local instance of it
 
-app.use(express.static('public'));			// use the /public directory for static files
-
 // serial port initialization:
-var serialport = require('serialport'),	// include the serialport library
-SerialPort  = serialport.SerialPort,		// make a local instance of serial
-portName = process.argv[2],							// get the port name from the command line
-portConfig = {
+var serialport = require('serialport');	// include the serialport library
+var SerialPort  = serialport;					  // make a local instance of serial
+var portName = process.argv[2];				  // get the port name from command line
+var portConfig = {
 	baudRate: 9600,
 	// call myPort.on('data') when a newline is received:
 	parser: serialport.parsers.readline('\n')
@@ -36,23 +34,6 @@ portConfig = {
 // open the serial port:
 var myPort = new SerialPort(portName, portConfig);
 
-// this runs after the server successfully starts:
-function serverStart() {
-	var port = server.address().port;
-	console.log('Server listening on port '+ port);
-}
-
-// this is the callback function for when the client
-// requests a static file:
-function serveFiles(request, response) {
-	var options = {							// options for serving files
-		root: __dirname + '/public/'		// root is the /public directory in the app directory
-	};
-	// get the file name from the request parameter:
-	var fileName = request.params.name;
-	// send the file:
-	response.sendFile(fileName, options);
-}
 
 // get an analog reading from the serial port.
 // This is a callback function for when the client requests /device/channel:
@@ -74,7 +55,7 @@ function getSensorReading(request, response) {
 }
 
 // start the server:
-var server = app.listen(8080, serverStart);
+var server = app.listen(8080);
 // start the listeners for GET requests:
-app.get('/files/:name', serveFiles);				// GET handler for all static files
+app.use('/',express.static('public'));   // set a static file directory
 app.get('/device/:channel', getSensorReading);	// GET handler for /device

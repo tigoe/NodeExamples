@@ -8,11 +8,11 @@
 */
 
 // you can do this with http or https:
-var http = require('http');
+var http = require('https');
 
 // make the POST data a JSON object and stringify it:
 var postData =JSON.stringify({
-  'username':'Bob'
+  'sensorValue':23
 });
 
 /*
@@ -22,9 +22,9 @@ var postData =JSON.stringify({
 */
 
 var options = {
-  host: 'www.example.com',
+  host: 'dweet.io',
   port: 443,
-  path: '/logout',
+  path: '/dweet/for/scandalous-cheese-hoarder',
 	method: 'POST',
 	headers: {
     'Content-Type': 'application/json',

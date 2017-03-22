@@ -16,6 +16,8 @@ void loop() {
       int sensor = analogRead(channel);
       // print the result back to the server:
       Serial.println(sensor);
+    } else {
+      Serial.println("-1");   // send back -1 as an error
     }
   }
 }

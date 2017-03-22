@@ -26,7 +26,7 @@ by Tom Igoe
 
 // serial port initialization:
 var SerialPort = require('serialport'),			// include the serialport library
-	portName = process.argv[2],								// get the port name from the command line
+	portName =  process.argv[2],								// get the port name from the command line
 	portConfig = {
 		baudRate: 9600,
 		// call myPort.on('data') when a newline is received:

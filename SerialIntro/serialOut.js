@@ -27,7 +27,7 @@ by Tom Igoe
 var SerialPort = require('serialport'),			// include the serialport library
 	portName = process.argv[2],								// get the port name from the command line
 	portConfig = {
-		baudRate: 9600,
+		baudRate: 9600 ,
 		// call myPort.on('data') when a newline is received:
 		parser: SerialPort.parsers.readline('\n')
 	};
@@ -38,6 +38,7 @@ var myPort = new SerialPort(portName, portConfig);
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
 myPort.on('error', serialError);	// called when there's an error with the serial port
+myPort.on('data', listen);
 
 function openPort() {
 	var brightness = 0;				// the brightness to send for the LED
@@ -59,6 +60,11 @@ function openPort() {
 	}
 	// set an interval to update the brightness 2 times per second:
 	setInterval(sendData, 500);
+}
+
+function listen(data) {
+	console.log("I am listening!!!");
+	console.log(data);
 }
 
 function closePort() {

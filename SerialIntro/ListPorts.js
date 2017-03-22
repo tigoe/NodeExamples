@@ -8,7 +8,6 @@ those new to JavaScript
 
 
 var serialport = require("serialport");
-var myName = "unknown";
 // list serial ports:
 serialport.list(listPorts);
 

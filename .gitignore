@@ -1,11 +1,3 @@
-SocketIO/node_modules/*
 SocketIO/npm-debug.log
-WriteToFile/node_modules/*
-Traceroute/node_modules/*
-SerialSocketExample/node_modules/*
-SerialIntro/node_modules/*
-node-hue-api/node_modules/*
-ExpressIntro/node_modules/*
-SerialToBrowser/node_modules/*
+*/node_modules/*
 EnertivClient/cred.js
-SerialToWsServer/node_modules/*
