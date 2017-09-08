@@ -3,16 +3,16 @@ socketServer.js
 
 A simple chat server in node.js.
 Prints all client text to the console. Keeps track of clients
-in an array. Typing 'c' will print the array of clients
+in an array. Typing 'c' will print the array of clients.
+If a remote client sends 'x' it will be removed from the list.
 
 created 25 Jan 2015
 modified 7 Sept 2017
 by Tom Igoe
 */
 
-var net = require('net'), // make an instance of the net library
-clients = new Array,      // array to track clients when they connect
-input = '';               // input string from the keyboard (STDIN)
+var net = require('net'); // make an instance of the net library
+var clients = new Array;  // array to track clients when they connect
 
 var stdin = process.openStdin();    // enable input from the keyboard
 stdin.setEncoding('utf8');          // encode everything typed as a string
