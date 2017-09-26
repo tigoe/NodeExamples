@@ -19,20 +19,15 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 
 created 21 Aug 2012
-modified 11 Oct 2016
+modified 26 Sept 2017
 by Tom Igoe
 
 */
 
 // serial port initialization:
-var SerialPort = require('serialport'),		// include the serialport library
-portName = process.argv[2],								// get the port name from the command line
-portConfig = {
-	baudRate: 9600
-};
-
-// open the serial port:
-var myPort = new SerialPort(portName, portConfig);
+var SerialPort = require('serialport');			// include the serialport library
+var	portName =  process.argv[2];						// get the port name from the command line
+const myPort = new SerialPort(portName);
 
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
@@ -41,7 +36,6 @@ myPort.on('data', listen);				// called when there's new incoming serial data
 
 function openPort() {
 	console.log('port open');
-	console.log('baud rate: ' + myPort.options.baudRate);
 }
 
 function closePort() {
