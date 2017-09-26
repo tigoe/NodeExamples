@@ -17,33 +17,28 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 
 created 17 June 2014
-modified 11 Oct 2016
+modified 26 Sept 2017
 by Tom Igoe
 
 */
 
 
 // serial port initialization:
-var SerialPort = require('serialport'),			// include the serialport library
-	portName = process.argv[2],								// get the port name from the command line
-	portConfig = {
-		baudRate: 9600 ,
-		// call myPort.on('data') when a newline is received:
-		parser: SerialPort.parsers.readline('\n')
-	};
-
-// open the serial port:
-var myPort = new SerialPort(portName, portConfig);
+var SerialPort = require('serialport');			// include the serialport library
+var	portName =  process.argv[2];								// get the port name from the command line
+const Readline = SerialPort.parsers.Readline;
+const myPort = new SerialPort(portName);
+const parser = new Readline();
+myPort.pipe(parser);
 
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
 myPort.on('error', serialError);	// called when there's an error with the serial port
-myPort.on('data', listen);
+parser.on('data', listen);
 
 function openPort() {
 	var brightness = 0;				// the brightness to send for the LED
 	console.log('port open');
-	console.log('baud rate: ' + myPort.options.baudRate);
 
 	// since you only send data when the port is open, this function
 	// is local to the openPort() function:
