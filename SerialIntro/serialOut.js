@@ -9,7 +9,7 @@ every second.
 
 To call this from the command line:
 
-node serialTest.js portname
+node serialOut.js portname
 
 where portname is the path to the serial port.
 
@@ -19,22 +19,19 @@ those new to JavaScript
 created 17 June 2014
 modified 26 Sept 2017
 by Tom Igoe
-
 */
-
 
 // serial port initialization:
 var SerialPort = require('serialport');			// include the serialport library
-var	portName =  process.argv[2];								// get the port name from the command line
-const Readline = SerialPort.parsers.Readline;
-const myPort = new SerialPort(portName);
-const parser = new Readline();
-myPort.pipe(parser);
+var	portName =  process.argv[2];						// get the port name from the command line
+const myPort = new SerialPort(portName);		// open the port
+const parser = new Readline();							// make a new parser to read ASCII lines
+myPort.pipe(parser);												// pipe the serial stream to the parser
 
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
 myPort.on('error', serialError);	// called when there's an error with the serial port
-parser.on('data', listen);
+parser.on('data', listen);				// called when there's new data incoming
 
 function openPort() {
 	var brightness = 0;				// the brightness to send for the LED

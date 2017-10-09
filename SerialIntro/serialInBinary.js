@@ -11,7 +11,7 @@ raw value, not as a character
 
 To call this from the command line:
 
-node serialTest.js portname
+node serialInBinary.js portname
 
 where portname is the path to the serial port.
 
@@ -19,7 +19,7 @@ refactored to get rid of anonymous functions, to make it clearer for
 those new to JavaScript
 
 created 21 Aug 2012
-modified 26 Sept 2017	
+modified 26 Sept 2017
 by Tom Igoe
 
 */
@@ -27,7 +27,7 @@ by Tom Igoe
 // serial port initialization:
 var SerialPort = require('serialport');			// include the serialport library
 var	portName =  process.argv[2];						// get the port name from the command line
-const myPort = new SerialPort(portName);
+const myPort = new SerialPort(portName);		// open the serial port
 
 myPort.on('open', openPort);			// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
