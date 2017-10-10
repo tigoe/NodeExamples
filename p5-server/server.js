@@ -1,6 +1,10 @@
 /*
-Making Things Talk 3rd ed.
-context: node.js
+  minimal p5.js server
+  serves static files from a folder called public
+  and responds to a GET request
+
+  created May 2016
+  by Tom Igoe
 */
 
 var express = require('express');	        // include the express library

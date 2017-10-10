@@ -19,7 +19,7 @@ function setup() {
 	ageField.position(10, 40);
 	sendButton.position(10, 70);
 	responseDiv.position(10, 100);
-	sendButton.touchEnded(sendRequest);						``// give the button a behavior
+	sendButton.touchEnded(sendRequest);					// give the button a behavior
 }
 
 function sendRequest() {
