@@ -7,8 +7,8 @@
   by Tom Igoe
 */
 
-var express = require('express');	        // include the express library
-var server = express();					          // create a server using express
+var express = require('express');         // include the express library
+var server = express();                   // create a server using express
 server.use('/',express.static('public')); // serve static files from /public
 
 // respond to GET requests:
