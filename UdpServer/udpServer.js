@@ -1,7 +1,7 @@
 /*
 UDP server.js
 
-A UDP socket server in node.js.
+A UDP server in node.js.
 Tracks remote clients in a list called clients. If a client sends an x,
 it's removed from the list.
 
