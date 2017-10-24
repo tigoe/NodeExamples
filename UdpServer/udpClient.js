@@ -10,7 +10,7 @@ by Tom Igoe
 const udp = require('dgram');         // include UDP datagram functions
 const serverAddress = '127.0.0.1';    // server address
 const serverPort = 8888;              // server's receiving port
-const client = dgram.createSocket('udp4');  // create a datagram socket
+const client = udp.createSocket('udp4');  // create a datagram socket
 
 var stdin = process.openStdin();    // enable input from the keyboard
 stdin.setEncoding('utf8');          // encode everything typed as a string
@@ -29,5 +29,5 @@ function messageSent(error) {   // when a message is sent,
 function readKeyboardInput(data) {
   data = data.trim();                     // trim any whitespace from the string
   // send the message:
-  udp.send(data, serverPort, serverAddress, messageSent);
+  client.send(data, serverPort, serverAddress, messageSent);
 }
