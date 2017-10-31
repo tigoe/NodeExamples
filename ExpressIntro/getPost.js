@@ -4,16 +4,17 @@
 	in Express.js 4.0
 
 	created 10 Feb 2015
+  modified 30 Oct 2017
 	by Tom Igoe
 */
 
-var express = require('express');			// include express.js
-var app = express();						// a local instance of it
+var express = require('express');			    // include express.js
+var app = express();						          // a local instance of it
 var bodyParser = require('body-parser');	// include body-parser
 
 // you need a couple of parsers for the body of a POST request:
-app.use(bodyParser.json()); 						// for  application/json
-app.use(bodyParser.urlencoded()); // for application/x-www-form-urlencoded
+app.use(bodyParser.json()); 						  // for  application/json
+app.use(bodyParser.urlencoded({extended: false})); // for application/x-www-form-urlencoded
 
 // this runs after the server successfully starts:
 function serverStart() {
@@ -30,8 +31,7 @@ function formatResponse(thisContent) {
   	return result;
 }
 
-// this is the GET handler:
-app.get('/', function (request, response) {
+function handleGet (request, response) {
 	console.log('got a GET request');
 	// the parameters of a GET request are passed in
 	// request.query. Pass that to formatResponse()
@@ -42,10 +42,9 @@ app.get('/', function (request, response) {
 	// send the response:
 	response.send(content);
 	response.end();
-});
+}
 
-// accept POST request on the homepage
-app.post('/', function (request, response) {
+function handlePost(request, response) {
 	console.log('Got a POST request');
 	// the parameters of a GET request are passed in
 	// request.body. Pass that to formatResponse()
@@ -56,7 +55,9 @@ app.post('/', function (request, response) {
 	// send the response:
 	response.send(content);
 	response.end();
-});
+}
 
 // start the server:
 var server = app.listen(8080, serverStart);
+app.get('/', handleGet);    // GET request listener
+app.post('/', handlePost);  // POST request listener
