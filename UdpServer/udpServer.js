@@ -11,7 +11,6 @@ by Tom Igoe
 */
 
 var udp = require('dgram');         // include UDP datagram functions
-var clients = new Array;            // array to track clients when they connect
 var input = '';                     // input string from the keyboard (STDIN)
 
 var stdin = process.openStdin();    // enable input from the keyboard
