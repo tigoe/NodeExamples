@@ -4,6 +4,7 @@
 	in Express.js 4.0
 
 	created 14 Feb 2016
+  modified 30 Oct 2017
 	by Tom Igoe
 */
 
@@ -20,8 +21,7 @@ function serverStart() {
   console.log('Server listening on port '+ port);
 }
 
-// this is the POST handler:
-app.all('/*', function (request, response) {
+function handleRequests(request, response) {
 	console.log('Got a ' + request.method + ' request');
 	// the parameters of a GET request are passed in
 	// request.body. Pass that to formatResponse()
@@ -36,7 +36,8 @@ app.all('/*', function (request, response) {
 	// send the response:
 	response.send('OK');
 	response.end();
-});
+}
 
 // start the server:
 var server = app.listen(8080, serverStart);
+app.all('/*', handleRequests);    // request listener for all types of requests
