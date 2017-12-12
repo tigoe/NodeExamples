@@ -1,9 +1,9 @@
 {
   "name": "traceroute example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description" : "runs a traceroute from node.js",
   "dependencies": {
-    "traceroute": "0.0.1"
+    "nodejs-traceroute": "*"
   },
   "engines": {
     "node": "0.10.x",

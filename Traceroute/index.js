@@ -1,4 +1,4 @@
-traceroute = require('traceroute');	// include the traceroute library
+const Traceroute = require('nodejs-traceroute');	// include the traceroute library
 var destination = process.argv[2];	// get the site name from the command line
 
 if (!destination) {
@@ -7,10 +7,27 @@ if (!destination) {
 	console.log();
 	process.exit(0);
 } else {
-	console.log("Tracing route to: " +destination);			// list the destination
+	console.log("Tracing route to: " + destination);			// list the destination
 }
 
-// start the trace
-traceroute.trace(destination, function (error,hops) {
-  if (!error) console.log(hops);
-});
+try {
+	const tracer = new Traceroute();				// make a new instance of the library
+
+	// callbacks for hop and close listeners:
+	function printHop(hop) {
+		console.log('hop: ' + JSON.stringify(hop));
+	}
+
+	function printEnd() {
+		console.log('end of trace');
+	}
+	// set listeners for hop and close events:
+	tracer
+	.on('hop', printHop)
+	.on('close', printEnd);
+
+	// start the trace:
+	tracer.trace(destination);
+} catch (exception) {				// if there's a problem
+	console.log(exception);		// print what the problem was
+}
