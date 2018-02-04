@@ -25,12 +25,14 @@ function serverStart() {
 // this handles all requests:
 function handleRequests(request, response) {
 	console.log('Got a ' + request.method + ' request');
-  console.log('client address: ' + request.connection. remoteAddress);
+  console.log('client address: ' + request.connection.remoteAddress);
   // print all the headers:
   console.log(request.rawHeaders);
 
 	// send the response:
-	response.send('OK');
+	response.write('what I know about your client:');
+  response.write('client address: ' + request.connection.remoteAddress);
+  response.write('request headers:' + request.rawHeaders);
 	response.end();
 }
 
