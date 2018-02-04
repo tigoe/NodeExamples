@@ -1,12 +1,16 @@
 /*
   File Uploader
 
+ shows how to manage file uploads using express.js and multer.js
   note: upload fieldname must be the same as this, e.g 'image'.
   Use the HTML page public/uploader.html, or this curl example:
   curl  -F image=@path/to/yourImage.jpg 'http://localhost:8080/upload'
+
+  Expects the file to be a JPG. Saves the file in the /upload directory.
 */
 var express = require('express');   // include express.js
 var multer  = require('multer');    // include multer.js as body parser
+var server = express();             // initialize the server app
 
 // set up file upload desintation and renaming callback:
 var storage = multer.diskStorage({
@@ -14,9 +18,9 @@ var storage = multer.diskStorage({
   filename: renameFile
 });
 
-// initialize the server app:
-var app = express();
-app.use('/',express.static('public'));
+// use the express.static router to serve static files
+// from the /publid directory:
+server.use('/',express.static('public'));
 
 // initialize multer bodyparser using storage options from above:
 var upload = multer({storage: storage});
@@ -41,6 +45,6 @@ function renameFile(request, file, callback) {
 }
 
 // start the server:
-var server = app.listen(8080);
+server.listen(8080);
 // set a route for file upload POST requests:
-app.post('/upload', type, getUpload);
+server.post('/upload', type, getUpload);
