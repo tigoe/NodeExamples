@@ -1,16 +1,16 @@
 {
   "name": "ExpressIntro",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
-  	"name":"Tom Igoe"
-   },
+    "name": "Tom Igoe"
+  },
   "dependencies": {
     "express": ">=4.0.0",
-    "body-parser" : ">=1.11.0",
-    "multer" : "*"
+    "body-parser": ">=1.11.0",
+    "multer": "*"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
+    "node": ">=0.10.x",
+    "npm": ">=1.3.x"
   }
 }
