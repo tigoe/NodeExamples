@@ -9,13 +9,13 @@
 */
 
 var express = require('express');	// include express.js
-var app = express();				// a local instance of it
+var server = express();				// a local instance of it
 var names = ['Andres', 'Bob', 'Carol', 'David', 'Ed', 'Francesca'];
 
 
 // this runs after the server successfully starts:
 function serverStart() {
-  var port = server.address().port;
+  var port = this.address().port;
   console.log('Server listening on port '+ port);
 }
 
@@ -50,8 +50,8 @@ function getAge(request, response) {
 
 
 // start the server:
-var server = app.listen(8080, serverStart);
+server.listen(8080, serverStart);
 // set route handlers:
-app.get('/', getRoot);      // listen for GET /
-app.get('/name/', getName); // listen for GET /name
-app.get('/age/', getAge);   // listen for GET /age
+server.get('/', getRoot);      // listen for GET /
+server.get('/name/', getName); // listen for GET /name
+server.get('/age/', getAge);   // listen for GET /age

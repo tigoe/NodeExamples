@@ -7,18 +7,18 @@
 	the values in and adds them to arrays.
 
 	created 10 Feb 2015
-  modified 30 Oct 2017
+  modified 4 Feb 2018
 	by Tom Igoe
 */
 
 var express = require('express');	// include express.js
-var app = express();							// a local instance of it
+var server = express();							// a local instance of it
 var names = [];										// an array for name values from the client
 var ages = [];										// an array of age values from the client
 
 // this runs after the server successfully starts:
 function serverStart() {
-  var port = server.address().port;
+  var port = this.address().port;
   console.log('Server listening on port '+ port);
 }
 
@@ -91,11 +91,11 @@ function getAges(request, response) {
 }
 
 // start the server:
-var server = app.listen(8080, serverStart);
-app.get('/', getRoot);          // GET the root of the site
-app.get('/age/', getAge);       // GET the last age submitted
-app.get('/ages/', getAges);     // GET all ages
-app.get('/age/:age', setAge);   // GET to set an age
-app.get('/name/', getName);     // GET the last name given
-app.get('/names/', getNames);   // GET all names
-app.get('/name/:name', setName);// GET to set a name
+server.listen(8080, serverStart);
+server.get('/', getRoot);          // GET the root of the site
+server.get('/age/', getAge);       // GET the last age submitted
+server.get('/ages/', getAges);     // GET all ages
+server.get('/age/:age', setAge);   // GET to set an age
+server.get('/name/', getName);     // GET the last name given
+server.get('/names/', getNames);   // GET all names
+server.get('/name/:name', setName);// GET to set a name
