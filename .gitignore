@@ -2,3 +2,5 @@ SocketIO/npm-debug.log
 */node_modules/*
 EnertivClient/cred.js
 .DS_Store
+ExpressIntro/package-lock.json
+FourLineServer/package-lock.json
