@@ -20,7 +20,7 @@ server.use('/',express.static('public'));
 
 function openPort() {
 	console.log('port open');
-	console.log('baud rate: ' + myPort.options.baudRate);
+	console.log('baud rate: ' + myPort.baudRate);
 }
 
 function listen(data) {
