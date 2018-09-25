@@ -1,11 +1,11 @@
 {
   "name": "NodeSerialLab",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
-  	"name":"Tom Igoe"
-   },
+    "name": "Tom Igoe"
+  },
   "dependencies": {
-    "serialport": "*"
+    "serialport": ">=7.0.0"
   },
   "engines": {
     "node": "0.10.x",

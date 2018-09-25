@@ -4,3 +4,4 @@ EnertivClient/cred.js
 .DS_Store
 ExpressIntro/package-lock.json
 FourLineServer/package-lock.json
+SerialToWsServer/package-lock.json

@@ -22,16 +22,17 @@ by Tom Igoe
 */
 
 // serial port initialization:
-var SerialPort = require('serialport');			// include the serialport library
+const SerialPort = require('serialport');			// include the serialport library
+const Readline = require('@serialport/parser-readline');
 var	portName =  process.argv[2];						// get the port name from the command line
 const myPort = new SerialPort(portName);		// open the port
-const parser = new Readline();							// make a new parser to read ASCII lines
-myPort.pipe(parser);												// pipe the serial stream to the parser
+const parser = new Readline();				    // make a new parser to read ASCII lines
+myPort.pipe(parser);							// pipe the serial stream to the parser
 
-myPort.on('open', openPort);			// called when the serial port opens
+myPort.on('open', openPort);		// called when the serial port opens
 myPort.on('close', closePort);		// called when the serial port closes
 myPort.on('error', serialError);	// called when there's an error with the serial port
-parser.on('data', listen);				// called when there's new data incoming
+parser.on('data', listen);			// called when there's new data incoming
 
 function openPort() {
 	var brightness = 0;				// the brightness to send for the LED
