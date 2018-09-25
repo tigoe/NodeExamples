@@ -22,11 +22,11 @@ by Tom Igoe
 */
 
 // serial port initialization:
-var SerialPort = require('serialport');			// include the serialport library
+const SerialPort = require('serialport');			// include the serialport library
+const Readline = require('@serialport/parser-readline');
 var	portName =  process.argv[2];						// get the port name from the command line
 var brightness = 0;													// the brightness to send for the LED
 
-const Readline = SerialPort.parsers.Readline;	// make an instance of the Readline parser
 const myPort = new SerialPort(portName);			// open the port
 const parser = new Readline();								// make a new parser to read ASCII lines
 myPort.pipe(parser);													// pipe the serial stream to the parser
