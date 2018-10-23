@@ -1,21 +1,25 @@
 /*
-socketClient.js
-
-A simple chat client in node.js.
-Connects to a TCP socket server on port 8001. Sends anything
+A  chat client in node.js.
+Connects to a TCP socket server. Sends anything
 typed on the keyboard to the server. If the server sends an
 'end' event, the program stops.
+
+To start it, give it a server address and a port number
 
 created 25 Jan 2015
 modified 7 Sept 2017
 by Tom Igoe
 */
-
-var net = require('net'),				// make an instance of the net library
-client = new net.Socket(),			// make a new instance of the socket class
-input = '',											// input string from the keyboard (STDIN)
-serverAddress = process.argv[2],// get the server address from the command line
-portNumber = process.argv[3];		// get the port number from the command line
+// make an instance of the net library:
+const net = require('net');	
+// make a new instance of the socket class:			
+var client = new net.Socket();		
+// input string from the keyboard (STDIN):	
+var input = '';			
+// get the server address from the command line:				
+var serverAddress = process.argv[2];
+// get the port number from the command line
+var portNumber = process.argv[3];		
 
 // make sure the server address, and the port number are filled in:
 if (!serverAddress || !portNumber) {
@@ -25,8 +29,8 @@ if (!serverAddress || !portNumber) {
 }
 
 var stdin = process.openStdin();	 // enable input from the keyboard
-stdin.setEncoding('utf8');			   // encode everything typed as a string
-client.setEncoding('utf8');				 // encode everything sent by the client as a string
+stdin.setEncoding('utf8');			 // encode everything typed as a string
+client.setEncoding('utf8');	 // encode everything sent by the client as a string
 
 client.connect(portNumber, serverAddress, login);	// connect to the server
 

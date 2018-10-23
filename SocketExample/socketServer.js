@@ -1,17 +1,20 @@
 /*
-socketServer.js
-
-A simple chat server in node.js.
+A  TCP  chat  server in node.js.
 Prints all client text to the console. Keeps track of clients
 in an array. Typing 'c' will print the array of clients.
 If a remote client sends 'x' it will be removed from the list.
 
 created 25 Jan 2015
-modified 7 Sept 2017
+modified 22 Oct 2018
 by Tom Igoe
 */
 
-var net = require('net'); // make an instance of the net library
+// make an instance of the net library:
+const net = require('net');
+// create the server:
+var server = net.createServer(listenForClients);
+// start the server listening:
+server.listen(8080);
 var clients = new Array;  // array to track clients when they connect
 
 var stdin = process.openStdin();    // enable input from the keyboard
@@ -20,9 +23,6 @@ stdin.setEncoding('utf8');          // encode everything typed as a string
 // this function runs if there's input from the keyboard.
 // you need to hit enter to generate this event.
 stdin.on('data', readKeyboardInput);
-
-var server = net.createServer(listenForClients);  // create the server
-server.listen(8080);                              // start the server listening
 
 // This function is called every time a new client connects:
 function listenForClients(client) {
@@ -63,6 +63,8 @@ function listenForClients(client) {
 
 function checkClientList(clientToDelete) {
   for (c in clients) {
+    // if a given client is undefined, ir it's marked for deletion,
+    // then delete it:
     if ((typeof(clients[c]) === 'undefined') ||
     (clients[c] === clientToDelete)) {
       console.log('deleting client ' + clients[c].remoteAddress);
@@ -74,7 +76,6 @@ function checkClientList(clientToDelete) {
 
 // read incoming keyboard data:
 function readKeyboardInput(data) {
-
   data = data.trim();                 // trim any whitespace from the string
   switch ('i got ' + data) {
     case 'c':

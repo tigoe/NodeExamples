@@ -5,3 +5,4 @@ EnertivClient/cred.js
 ExpressIntro/package-lock.json
 FourLineServer/package-lock.json
 SerialToWsServer/package-lock.json
+*/.vscode/*

@@ -1,19 +1,26 @@
 /*
-UDP server.js
-
 A UDP client in node.js.
 sends text strings from the stdin to a remote server using UDP
 
 created 17 Oct 2017
+modified 22 Oct 2018
 by Tom Igoe
 */
-const udp = require('dgram');         // include UDP datagram functions
-const serverAddress = '127.0.0.1';    // server address
-const serverPort = 8888;              // server's receiving port
-const client = udp.createSocket('udp4');  // create a datagram socket
+// include UDP datagram library:
+const udp = require('dgram');  
+// server address:
+const serverAddress = '127.0.0.1'; 
+// server's receiving port:        
+const serverPort = 8888;              
+// create UDP socket:
+var sender = udp.createSocket('udp4');   
+// bind the sender to a port number:
+sender.bind(8887);  
 
-var stdin = process.openStdin();    // enable input from the keyboard
-stdin.setEncoding('utf8');          // encode everything typed as a string
+// enable input from the keyboard:
+var stdin = process.openStdin();  
+// encode everything typed as a string:  
+stdin.setEncoding('utf8');
 
 // this function runs if there's input from the keyboard.
 // you need to hit enter to generate this event.
@@ -27,7 +34,8 @@ function messageSent(error) {   // when a message is sent,
 
 // read incoming keyboard data:
 function readKeyboardInput(data) {
-  data = data.trim();                     // trim any whitespace from the string
+  // trim any whitespace from the string:
+  data = data.trim();   
   // send the message:
-  client.send(data, serverPort, serverAddress, messageSent);
+  sender.send(data, serverPort, serverAddress, messageSent);
 }
