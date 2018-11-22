@@ -6,3 +6,6 @@ ExpressIntro/package-lock.json
 FourLineServer/package-lock.json
 SerialToWsServer/package-lock.json
 */.vscode/*
+.vscode/arduino.json
+.vscode/arduino.json
+.vscode/c_cpp_properties.json
