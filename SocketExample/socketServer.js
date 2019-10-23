@@ -78,6 +78,7 @@ function checkClientList(clientToDelete) {
 function readKeyboardInput(data) {
   data = data.trim();                 // trim any whitespace from the string
   switch (data) { 
+    case 'c':
     for (c in clients) {
       console.log(clients[c].remoteAddress);
     }             // list the client array
