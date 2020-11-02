@@ -9,6 +9,13 @@ openssl req -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out doma
 to properly sign:
 https://certbot.eff.org
 
+Note: on DigitalOcean,  key and cert are at:
+/etc/letsencrypt/live/domainName/privkey.pem // the key
+/etc/letsencrypt/live/domainName/cert.pem   // the cert
+
+Updated 2 Nov 2020
+by Tom Igoe
+
 */
 // include libraries and declare global variables:
 var express = require('express');       // include the express library
