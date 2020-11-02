@@ -12,6 +12,9 @@ https://certbot.eff.org
 Note: on DigitalOcean,  key and cert are at:
 /etc/letsencrypt/live/domainName/privkey.pem // the key
 /etc/letsencrypt/live/domainName/cert.pem   // the cert
+See
+https://certbot.eff.org/docs/using.html#where-are-my-certificates
+for details
 
 Updated 2 Nov 2020
 by Tom Igoe
