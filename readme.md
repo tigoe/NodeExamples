@@ -1,6 +1,6 @@
 # Node Examples
 
-This is a collection of examples for node.js and express.js.
+This is a collection of examples for node.js and express.js. Includes a short [intro to JavaScript patterns](IntroJavaScriptPatterns.md) in node.js. 
 
 ## Running on Glitch.com
 
