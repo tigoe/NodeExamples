@@ -24,7 +24,7 @@ $ npm init
  Once you've got everything installed, you can run a project from the command line with the main script's name like so:
 
  ````sh
- node server.js
+$ node server.js
  ````
 
  Type control-C to stop the project. If you need to run it in the background for as long as the host is running, consider using [PM2](https://pm2.keymetrics.io/docs/usage/quick-start/). 
