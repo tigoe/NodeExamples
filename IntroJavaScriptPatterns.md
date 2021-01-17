@@ -6,13 +6,13 @@ If you understand variable scope from C or Java (or Arduino or Processing), you'
 
 JavaScript treats any variable that's never previously been declared as a global variable as well, so you should make sure you declare all your variables before you use them, using the keyword `var`, like so:
 
-````
+````js
 var pageCounter = 0;
 ````
 
 You can declare multiple variables using the same `var` keyword, which you'll see all the time. When you do, separate the variable declarations with commas like so:
 
-````
+````js
 var pageCounter = 0,
 	clickCounter = 0,
 	myName = "Tom", 
@@ -28,13 +28,13 @@ For example, imagine you're writing a custom script for a given web page, and yo
 
 Here's an example of a global variable shared by two scripts. The first is a script called `myScript.js`. It has just one line, that declares a variable named `myName`. Save it as a file called `myScript.js`:
 
-````
+````js
 var myName = "Tom";
 ````
 
 This script is called by the following HTML page, `index.html`, that has another script embedded in the head. Save it as `index.html` in the same directory as `myScript`:
 
-````
+````html
 <!DOCTYPE html>
 <html>
 	<head>
@@ -67,7 +67,7 @@ You can scatter variable declarations throughout a function, but all variables d
 
 Functions in JavaScript are first class objects. That means you can create them dynamically in your code, you can assign them to variables, you can pass them as arguments to other functions, and they can have their own properties and methods. Thus, there are a few of ways you can declare functions in JavaScript. The most familiar (to C and Java users) is like so:
 
-````
+````js
 // first declare the function:
 function doSomething() {
 	// function code goes here
@@ -79,7 +79,7 @@ doSomething();
 
 You can also declare functions as variables like so:
 
-````
+````js
 var doSomething = function() {
 	// function code goes here
 }
@@ -93,7 +93,7 @@ You'll see functions passed as parameters of other functions all the time. When 
 
 The simplest way to see callbacks in action is to use the `setInterval()` function, a core function in JavaScript. This function accepts a callback function as its first parameter, and a time interval as its second parameter. You can use it to make things happen on a regular interval.  Here's a simple clock script. First you declare the thing you want to happen as a function. Then you call `setInterval()` with this function as a parameter like so:
 
-````
+````js
 // This function prints the current date and time:
 function tick() {
 	var now = new Date();	
@@ -101,13 +101,14 @@ function tick() {
 }
 
 // now call setInterval(), which will call tick() once per second (1000ms):
+
+````js
 setInterval(tick, 1000);
 ````
 
 Save this as `clock.js` then run it in node.js like so:
 
-[source, bash]
-````
+````bash
 $ node clock.js
 ````
 
@@ -117,7 +118,7 @@ The script will print the time once a second. Every second it's making a callbac
 
 Functions don't have to be declared in advance; you can declare them dynamically, when you need them, inside of other functions. Functions that are declared in this way are called *closures*  (also called *immediate functions*) and you'll see them frequently in node.js. The tick() function in the clock example above can be written as an closure like so:
 
-````
+````js
 setInterval(function() {
 	var now = new Date();	
 	console.log(now);
@@ -128,7 +129,7 @@ There's one big advantage to using functions in this way: a function enclosed wi
 
 When a closure isn't given a name, as in the example above, they're called *anonymous functions* You can give your closures names if you wish; it'll help you to find them in stack trace when you have errors. Here's the function above with a name:
 
-````
+````js
 setInterval(function tick() {
 	var now = new Date();	
 	console.log(now);
