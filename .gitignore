@@ -9,3 +9,4 @@ SerialToWsServer/package-lock.json
 .vscode/arduino.json
 .vscode/arduino.json
 .vscode/c_cpp_properties.json
+websocket-examples/ArduinoWebsocketClient/arduino_secrets.h
