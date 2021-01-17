@@ -108,7 +108,7 @@ setInterval(tick, 1000);
 
 Save this as `clock.js` then run it in node.js like so:
 
-````bash
+````sh
 $ node clock.js
 ````
 
