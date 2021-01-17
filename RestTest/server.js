@@ -120,4 +120,4 @@ server.post('/motion/:motion', handlePostRequest);
 server.get('/datetime', handleGetRequest);
 server.post('/datetime/:datetime', handlePostRequest);
 
-server.listen(8080);                      // start the server
+server.listen(process.env.PORT || 8080);    // start the server

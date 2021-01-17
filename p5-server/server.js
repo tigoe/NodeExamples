@@ -28,5 +28,5 @@ function respondToClient(request, response) {
   response.end(JSON.stringify(responseBody));
 }
 
-server.listen(8080);                                  // start the server
+server.listen(process.env.PORT || 8080);              // start the server
 server.get('/name/:name/age/:age', respondToClient);  // listen for GET requests

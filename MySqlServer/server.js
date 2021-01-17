@@ -98,7 +98,7 @@ userInput       // get DB username and password, then:
         // for application/x-www-form-urlencoded:	  
         server.use(bodyParser.urlencoded({ extended: false }));
         // start the server and set up routes:
-        server.listen(8080, serverStart);
+        server.listen(process.env.PORT || 8080, serverStart);
         server.post('/add', addData);
         server.post('/data', getData);
         server.delete('/delete', deleteData);
