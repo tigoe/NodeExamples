@@ -69,7 +69,7 @@ function handleDate(request, response) {
 }
 
 // start the server:
-server.listen(8080, serverStart);
+server.listen(process.env.PORT || 8080, serverStart);
 server.get('/data', handleGet);    // GET request listener
 server.get('/date', handleDate);   // GET request listener
 server.post('/data', handlePost);  // POST request listener

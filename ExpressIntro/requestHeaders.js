@@ -37,6 +37,6 @@ function handleRequests(request, response) {
 }
 
 // start the server:
-server.listen(8080, serverStart);
+server.listen(process.env.PORT || 8080, serverStart);
 // request listener for all types of requests:
 server.all('/*', handleRequests);

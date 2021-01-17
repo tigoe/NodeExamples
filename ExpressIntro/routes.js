@@ -50,7 +50,7 @@ function getAge(request, response) {
 
 
 // start the server:
-server.listen(8080, serverStart);
+server.listen(process.env.PORT || 8080, serverStart);
 // set route handlers:
 server.get('/', getRoot);      // listen for GET /
 server.get('/name/', getName); // listen for GET /name

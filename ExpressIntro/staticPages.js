@@ -37,7 +37,7 @@ function serveHello(request, response) {
 }
 
 // start the server:
-server.listen(8080, serverStart);
+server.listen(process.env.PORT || 8080, serverStart);
 // start the listeners for GET requests:
 server.get('/date', serveDate);				  // GET handler for /date
 server.get('/name/:name', serveHello);	// GET handler for /name

@@ -45,6 +45,6 @@ function renameFile(request, file, callback) {
 }
 
 // start the server:
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 // set a route for file upload POST requests:
 server.post('/upload', type, getUpload);

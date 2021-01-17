@@ -91,7 +91,7 @@ function getAges(request, response) {
 }
 
 // start the server:
-server.listen(8080, serverStart);
+server.listen(process.env.PORT || 8080, serverStart);
 server.get('/', getRoot);          // GET the root of the site
 server.get('/age/', getAge);       // GET the last age submitted
 server.get('/ages/', getAges);     // GET all ages

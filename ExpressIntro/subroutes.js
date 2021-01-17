@@ -54,7 +54,7 @@ function getLivingroom(request, response, next) {
 }
 
 // start the server:
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 
 
 // set route listeners. Multiple callbacks means the event is passed
