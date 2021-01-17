@@ -8,4 +8,4 @@
 var express = require('express');	        // include the express library
 var server = express();					          // create a server using express
 server.use('/',express.static('public')); // serve static files from /public
-server.listen(8080);                      // start the server
+server.listen(process.env.PORT || 8080);  // start the server
