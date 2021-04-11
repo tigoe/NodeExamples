@@ -107,8 +107,7 @@ function postData(request, response) {
     appendFile(fileName, recordString)
       .then(result => console.log("saved")) // convert response to text
       .catch(error => console.log(error)); // if there is an error
-    // print out all the records:
-    console.log(records);
+ 
     // send the response in JSON format (to be consistent):
     response.json({ record: "received" });
   } else {

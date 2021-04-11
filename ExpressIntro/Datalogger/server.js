@@ -58,7 +58,7 @@ function getData(request, response) {
     // if the date is later than startDate,
     // add it to the response string
     if (recordDate >= startDate &&
-      recordDate <= endDate &&) {
+      recordDate <= endDate) {
       recordsToSend.push(thisRecord);
     }
   }
@@ -75,12 +75,6 @@ function postData(request, response) {
     // this is where we might consider putting the record into
     // a database instead of just putting it in an array:
     records.push(record);
-
-    let recordString = JSON.stringify(record) + "\n";
-    appendFile(fileName, recordString)
-      .then(result => console.log("saved")) // convert response to text
-      .catch(error => console.log(error)); // if there is an error
-
     console.log(records);
     // send the response in JSON format (to be consistent):
     response.json({ record: "received" });
