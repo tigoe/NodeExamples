@@ -5,6 +5,8 @@ There are two versions of the server here:
 * `server.js` saves incoming records in an array, and sends items from the array when requested. There is no persistent storage in this version.
 * `server-fileWriter.js` saves incoming records to a text file called `data.txt`, and sends items from the file when requested. This file exists even when the server is not running. 
 
+The server programs are written for HTTP, not HTTPS, but if they are served from glitch.com, they will operate as HTTPS. So the Arduino client is written as an HTTPS client too. If you prefer to run the servers on your own host and not use HTTPS, be sure to adjust the Arduino client accordingly.
+
 ## The API
 - GET /uid/records/startTime/endTime - returns all records from startTime to endTime.
   * uid is a client ID, a 9-byte ID in hexadecimal format
