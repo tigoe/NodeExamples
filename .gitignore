@@ -11,3 +11,4 @@ SerialToWsServer/package-lock.json
 .vscode/c_cpp_properties.json
 websocket-examples/ArduinoWebsocketClient/arduino_secrets.h
 ExpressIntro/Datalogger/DataLoggerHttpClientJSON/arduino_secrets.h
+*/arduino_secrets.h
