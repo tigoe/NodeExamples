@@ -1,0 +1,23 @@
+{
+  "name": "datalogger",
+  "version": "0.0.1",
+  "description": "A server to receive and send JSON-based, timestamped data records",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://github.com/tigoe/NodeExamples"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express"
+  ]
+}

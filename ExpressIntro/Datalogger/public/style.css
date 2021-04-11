@@ -1,0 +1,9 @@
+input {
+  position: sticky;
+  left: 120px;
+}
+
+span {
+  position: sticky;
+  left: 300px;
+}
