@@ -1,3 +1,3 @@
 # Datalogger
 
-This example has beem moved to my [Dataloggers repository](https://tigoe.github.io/DataloggingExamples/wifi-datalogger.md)
+This example has beem moved to my [Dataloggers repository](https://tigoe.github.io/DataloggingExamples/wifi-datalogger.html)
