@@ -1,0 +1,23 @@
+{
+  "name": "serverandclient",
+  "version": "0.0.1",
+  "description": "An express.js server combined with a node-fetch client",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "node-fetch",
+    "client",
+    "server"
+  ],
+  "author": "Tom Igoe",
+  "license": "ISC"
+}
