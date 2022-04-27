@@ -18,7 +18,6 @@
     "start": "node server.js"
   },
   "keywords": [
-    "mqtt",
     "node"
   ],
   "author": "Tom Igoe",
