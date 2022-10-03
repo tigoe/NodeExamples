@@ -5,9 +5,9 @@
     "name": "Tom Igoe"
   },
   "dependencies": {
-    "express": ">=4.0.0",
+    "express": ">=4.18.1",
     "body-parser": ">=1.11.0",
-    "multer": "*"
+    "multer": ">=1.4"
   },
   "engines": {
     "node": ">=0.10.x",
