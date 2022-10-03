@@ -15,6 +15,10 @@
 
 var express = require('express');			// include express.js
 var server = express();						    // a local instance of it
+var bodyParser = require('body-parser');	// include body-parser
+
+// you need a  body parser:
+server.use(bodyParser.json()); // for application/x-www-form-urlencoded
 
 // this runs after the server successfully starts:
 function serverStart() {
@@ -28,12 +32,14 @@ function handleRequests(request, response) {
   console.log('client address: ' + request.connection.remoteAddress);
   // print all the headers:
   console.log(request.rawHeaders);
+  console.log(request.body);
 
 	// send the response:
 	response.write('what I know about your client:');
   response.write('client address: ' + request.connection.remoteAddress);
   response.write('request headers:' + request.rawHeaders);
-	response.end();
+	
+  response.end();
 }
 
 // start the server:
