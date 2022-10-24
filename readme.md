@@ -1,7 +1,5 @@
 # Node Examples
 
-HAHAHAHAHA!
-
 This is a collection of examples for node.js and express.js. Includes a short [intro to JavaScript patterns](IntroJavaScriptPatterns.md) in node.js. 
 
 ## Creating a node.js Project
