@@ -29,7 +29,7 @@ $ npm init
 
  To re-create a project downloaded from a remote repository change directories into the project and use npm to install the dependencies. If `package.json` and `package-lock.json` exist, the command `npm install` will read them and install all needed dependencies into `node_modules`. 
 
- ## Running a Project
+## Running a Project
 
  Once you've got everything installed, you can run a project from the command line with the main script's name like so:
 
