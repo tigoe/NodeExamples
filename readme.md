@@ -9,6 +9,7 @@ Node.js runs in a command line interface. You can edit your files in any editor 
 * ProjectDirectory/
   * main_script.js   // your main JavaScript program
   * package.json     // a manifest of dependencies
+  * Package-lock.json // describes any changes that need to be made to package.json
   * public/          // a directory for static files
     * index.html     // static files to be served
     * style.css
