@@ -4,7 +4,17 @@ This is a collection of examples for node.js and express.js. Includes a short [i
 
 ## Creating a node.js Project
 
-Node.js runs in a command line interface. You can edit your files in any editor you want. To make a new project, create a directory for it, then create a main script file, which is usually a server, then use npm to install any libraries you know you'll use and initialize a package decription called `package.json`. FOr example, if you were making a project using express.js to make a web server, you'd start the project like so:
+Node.js runs in a command line interface. You can edit your files in any editor you want. A typical node.js project has the following structure:
+
+* ProjectDirectory/
+  * main_script.js   // your main JavaScript program
+  * package.json     // a manifest of dependencies
+  * public/          // a directory for static files
+    * index.html     // static files to be served
+    * style.css
+    * script.js
+
+To make a new project, create a directory for it, then create a main script file, which is usually a server, then use npm to install any libraries you know you'll use and initialize a package decription called `package.json`. For example, if you were making a project using express.js to make a web server, you'd start the project like so:
 
 ````sh
 $ mkdir project-dir 
