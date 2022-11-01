@@ -31,8 +31,8 @@ function handleRequests(request, response) {
 	console.log('Got a ' + request.method + ' request');
   console.log('client address: ' + request.connection.remoteAddress);
   // print all the headers:
-  console.log(request.rawHeaders);
-  console.log(request.body);
+  console.log(" raw headers: " + request.rawHeaders);
+  console.log("body: " + JSON.stringify(request.body));
 
 	// send the response:
 	response.write('what I know about your client:');
