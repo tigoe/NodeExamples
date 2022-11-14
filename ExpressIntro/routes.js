@@ -48,6 +48,9 @@ function getAge(request, response) {
 	response.end();			// close the connection
 }
 
+function notFound(request, response, next) {
+	response.status(404).send("not found");
+}
 
 // start the server:
 server.listen(process.env.PORT || 8080, serverStart);
@@ -55,3 +58,4 @@ server.listen(process.env.PORT || 8080, serverStart);
 server.get('/', getRoot);      // listen for GET /
 server.get('/name/', getName); // listen for GET /name
 server.get('/age/', getAge);   // listen for GET /age
+server.all('*', notFound);   // listen for GET /age
