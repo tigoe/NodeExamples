@@ -15,3 +15,5 @@ ExpressIntro/Datalogger/DataLoggerHttpClientJSON/arduino_secrets.h
 ExpressIntro/Datalogger/DataLoggerHttpClientJSON/arduino_secrets.h
 ExpressIntro/Datalogger/DataLoggerHttpClientJSON/arduino_secrets.h
 tom.html
+Encryption/private_key.pem
+Encryption/public_key.pem

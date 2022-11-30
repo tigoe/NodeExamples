@@ -14,7 +14,7 @@ openssl rsa -pubout -in private_key.pem -out public_key.pem
 Once you have generated the keys,
 to run this script to encrypt a string
 and save it to a file, type:
-$ node asymmetric-key.js decrypt filename
+$ node asymmetric-key.js encrypt string filename
 
 To decrypt a file encrypted with the public key:
 $ node asymmetric-key.js decrypt filename
@@ -70,7 +70,7 @@ switch (command) {
   default: // if the command is anything else:
     console.log('commands: \n\
   Encrypt a string in a file: \n\
-  $ node asymmetric-key.js decrypt filename \n\
+  $ node asymmetric-key.js encrypt filename \n\
    \n\
   Decrypt a file encrypted with the public key: \n\
   $ node asymmetric-key.js decrypt filename');
