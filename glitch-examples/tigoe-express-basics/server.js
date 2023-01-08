@@ -2,7 +2,7 @@
   simple server example in node.js
   adapted from expressjs.com examples, 2016
   
-  updated 9 Jun 2021
+  updated 8 Jan 2023
   by Tom Igoe
 */
 
@@ -27,7 +27,9 @@ var data = new Array();
 // a listener for GET /readings
 function handleGet(request, response) {
   console.log("got a GET request");
+  console.log(request.query);
   response.json(data);
+  console.log(process.env.PORT);
 }
 
 // a handler for POST /data
@@ -37,13 +39,16 @@ function handlePost(request, response) {
   // to the data you already have:
   let incomingData = request.body;
   console.log(incomingData);
+  console.log(request.connection.remoteAddress);
+  // console.log(request.rawHeaders);
   data.push(incomingData);
   response.json(data);
 }
 
 ///////////////////////////////////////   start:
-// start the server listening:
-server.listen(process.env.PORT || 8080); 
+// start the server listening on the glitch default,
+// or port 8080:
+server.listen(process.env.PORT || 8080);
 // define the API endpoints:
 server.get("/readings", handleGet);
 server.post("/data", handlePost);

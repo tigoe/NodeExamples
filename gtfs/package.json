@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "gtfs-realtime-bindings": "^0.0.6",
+    "request": "^2.88.2"
+  }
+}
