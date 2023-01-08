@@ -1,0 +1,29 @@
+{
+  "name": "express-ws-server",
+  "version": "0.0.2",
+  "description": "A websocket server using express.js and express-ws.js",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-ws": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "websocket",
+    "express"
+  ],
+  "author": "Tom Igoe",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}
