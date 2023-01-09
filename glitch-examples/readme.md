@@ -10,14 +10,14 @@ or
 https://glitch.com/~example-name
 ````
 
-[tigoe-express-basics]({{site.codeurl}}/tigoe-express-basics) shows some express.js basics. 
+[tigoe-express-basics]({{site.codeurl}}/glitch-examples/tigoe-express-basics) shows some express.js basics. 
 * [See it live]({{site.glitchliveurl}}tigoe-express-basics.me)
-* [remix the code on glitch.com]({{site.glitchcodeurl}}tigoe-express-basics)
+* [remix the code on glitch.com]({{site.glitchremixurl}}tigoe-express-basics)
 
-[tigoe-request-headers]({{site.codeurl}}/tigoe-request-headers) shows how to read client request headers in  express.js. 
+[tigoe-request-headers]({{site.codeurl}}/glitch-examples/tigoe-request-headers) shows how to read client request headers in  express.js. 
 * [See it live]({{site.glitchliveurl}}tigoe-request-headers.me)
-* [remix the code on glitch.com]({{site.glitchcodeurl}}tigoe-request-headers)
+* [remix the code on glitch.com]({{site.glitchremixurl}}tigoe-request-headers)
 
-[tigoe-mqtt-client]({{site.codeurl}}/tigoe-mqtt-client) shows how to make an mqtt client in node.js and in client-side JavaScript. 
+[tigoe-mqtt-client]({{site.codeurl}}/glitch-examples/tigoe-mqtt-client) shows how to make an mqtt client in node.js and in client-side JavaScript. 
 * [See it live]({{site.glitchliveurl}}tigoe-mqtt-client.me)
-* [remix the code on glitch.com]({{site.glitchcodeurl}}tigoe-mqtt-client)
+* [remix the code on glitch.com]({{site.glitchremixurl}}tigoe-mqtt-client)
