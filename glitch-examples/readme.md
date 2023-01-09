@@ -21,3 +21,7 @@ https://glitch.com/~example-name
 [tigoe-mqtt-client]({{site.codeurl}}/glitch-examples/tigoe-mqtt-client) shows how to make an mqtt client in node.js and in client-side JavaScript. 
 * [See hit live on Glitch.com](https://tigoe-mqtt-client.glitch.me)
 * [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-mqtt-client)
+
+[tigoe-websocket-server]({{site.codeurl}}/glitch-examples/tigoe-mqtt-client) shows how to make a WebSocket server  in node.js and client in client-side JavaScript. 
+* [See hit live on Glitch.com](https://tigoe-websocket-server.glitch.me)
+* [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-websocket-server)
