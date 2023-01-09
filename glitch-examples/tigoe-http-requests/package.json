@@ -1,0 +1,23 @@
+{
+  "name": "glitch-hello-node",
+  "version": "0.1.0",
+  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/tigoe-http-requests"
+  },
+  "license": "ISC",
+  "keywords": [
+    "node",
+    "glitch"
+  ]
+}

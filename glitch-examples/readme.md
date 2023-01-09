@@ -17,6 +17,10 @@ https://glitch.com/~example-name
 * [see it live on Glitch.com](https://tigoe-request-headers.glitch.me)
 * [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-request-headers)
 
+[tigoe-requests]({{site.codeurl}}/glitch-examples/tigoe-requests) an app for testing different kinds of HTTP requests. 
+* [see it live on Glitch.com](https://tigoe-requests.glitch.me)
+* [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-requests)
+
 [tigoe-mqtt-client]({{site.codeurl}}/glitch-examples/tigoe-mqtt-client) shows how to make an mqtt client in node.js and in client-side JavaScript. 
 * [see it live on Glitch.com](https://tigoe-mqtt-client.glitch.me)
 * [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-mqtt-client)
