@@ -9,14 +9,14 @@
   by Tom Igoe
 */
 
-
-var express = require('express');			    // include express.js
+// include express.js:
+const express = require('express');			    
 // a local instance of express:
-var server = express();
+let server = express();
 // instance of the websocket server:
-var wsServer = require('express-ws')(server); 
+let wsServer = require('express-ws')(server); 
 // list of client connections:
-var clients = new Array;
+let clients = new Array;
 
 // serve static files from /public:
 server.use('/', express.static('public')); 
@@ -42,8 +42,8 @@ function handleWs(ws, request) {
 
   // if a client sends a message, print it out:
   function clientResponse(data) {
-    console.log(request.connection.remoteAddress + ': ' + data);
-    broadcast(data);
+    console.log(request.ip + ': ' + data);
+    broadcast(data, request.ip);
   }
 
   // set up client event listeners:
@@ -52,10 +52,11 @@ function handleWs(ws, request) {
 }
 
 // This function broadcasts messages to all webSocket clients
-function broadcast(data) {
+function broadcast(data, clientAddress) {
   // iterate over the array of clients & send data to each
   for (let c in clients) {
-    clients[c].send(data);
+    console.log(clientAddress);
+    clients[c].send(clientAddress + ': ' + data);
   }
 }
 
