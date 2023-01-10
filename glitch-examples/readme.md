@@ -29,3 +29,7 @@ https://glitch.com/~example-name
 **[tigoe-websocket-server]({{site.codeurl}}/glitch-examples/tigoe-mqtt-client)** shows how to make a WebSocket server  in node.js and client in client-side JavaScript. 
 * [see it live on Glitch.com](https://tigoe-websocket-server.glitch.me)
 * [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-websocket-server)
+
+**[tigoe-node-fetch-client]({{site.codeurl}}/glitch-examples/tigoe-node-fetch-client)** This is both a server and a client. It shows how to make requests to a RESTful API using `fetch()`, simplify the result, and serve it via HTTP. It assumes you're using a microcontroller-based client or have some other reason for needing the results of an API to be simplified.
+* [see it live on Glitch.com](https://tigoe-node-fetch-client.glitch.me)
+* [remix the code on Glitch.com]({{site.glitchremixurl}}tigoe-node-fetch-client)
