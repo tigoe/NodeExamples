@@ -26,11 +26,11 @@ There are other examples in the [main directory](/) as well.
 Node.js runs in a command line interface. You can edit your files in any editor you want. A typical node.js project has the following structure:
 
 * ProjectDirectory/
-  * main_script.js   // your main JavaScript program
-  * package.json     // a manifest of dependencies
-  * Package-lock.json // describes any changes that need to be made to package.json
-  * public/          // a directory for static files
-    * index.html     // static files to be served
+  * main_script.js    - your main JavaScript program
+  * package.json      - a manifest of dependencies
+  * Package-lock.json - describes any changes that need to be made to package.json
+  * public/           - a directory for static files
+    * index.html      - static files to be served
     * style.css
     * script.js
 
