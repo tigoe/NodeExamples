@@ -4,7 +4,7 @@
   "description": "An express.js server combined with a node-fetch client",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {},
