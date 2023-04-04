@@ -2,6 +2,25 @@
 
 This is a collection of examples for node.js and express.js. Includes a short [intro to JavaScript patterns](IntroJavaScriptPatterns.md) in node.js. 
 
+The most up-to-date examples are:
+* [ExpressIntro](ExpressIntro) - this section contains a many examples using [express.js](https://expressjs.com), including:
+  * [FourLineServer](ExpressIntro/FourLineServer/) - a minimal static file server
+  * [staticPages](ExpressIntro/staticPages.js) - shows how to serve static pages as well as dynamic routes
+  * [getPost](ExpressIntro/getPost.js) - shows how to handle GET and POST requests, and how to handle json request data and form-urlencoded data
+  * [getPostPutDelete](ExpressIntro/getPostPutDelete.js) - shows how to use express.js .all() function to listen for any type of request (GET, POST, PUT, DELETE)
+  * [requestHeaders](ExpressIntro/requestHeaders.js) - shows how to get the raw headers of an HTTP request
+  * [restParameters](ExpressIntro/restParameters.js) - shows how to read RESTful parameters from the route of a request. 
+  subroutes
+  * [fileUploader](ExpressIntro/fileUploader.js) - shows how to use multer.js to make a web page that can upload files to your server. 
+  routes
+  * [subroutes](ExpressIntro/subroutes.js) - shows how to handle different RESTful subroutes
+* [glitch-examples](glitch-examples/) - these are examples for express.js, mqtt.js, websockets using ws.js, and  node-fetch.js  that I've posted on [glitch.com](https://glitch.com/@tigoe). Some of these duplicate the express intro examples above.
+* [HTTPS server](HttpsServer) - shows how to use express to respond to HTTPS requests. 
+* [SerialIntro](SerialIntro) - a few examples showing how to use Serialport.js
+ 
+There are other examples in the [main directory](/) as well. 
+
+
 ## Creating a node.js Project
 
 Node.js runs in a command line interface. You can edit your files in any editor you want. A typical node.js project has the following structure:
