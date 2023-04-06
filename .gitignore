@@ -1,5 +1,5 @@
 SocketIO/npm-debug.log
-*/node_modules/*
+node_modules
 EnertivClient/cred.js
 .DS_Store
 ExpressIntro/package-lock.json
