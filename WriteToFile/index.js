@@ -26,28 +26,31 @@ server.get('/data', function (request, response) {
 	// the file to the data file on the server:
 	var filePath = './data.json';
 
-	/* read the file  asynchronously.
-		 the second parameter of readFile is 
-		 the callback function that's called when
-		 readFile completes:
+	/* If the file exists (F_OK), read the file  asynchronously.
+		the second parameter of readFile is 
+		the callback function that's called when
+		readFile completes:
 	 */
-	fs.readFile(filePath, function (error, data) {
-		// if something goes wrong, throw an error:
-		if (error) throw error;
+	fs.access(filePath, fs.constants.R_OK, function (error) {
+		fs.readFile(filePath, function (error, data) {
+			// if something goes wrong, throw an error:
+			if (error) throw error;
 
-		// if you have a successful file read, print it
-		// to the client:
-		response.writeHead(200, { 'Content-Type': 'text/html' });
-		response.write("Here's what's in the data.json file: <br>");
-		response.write(data.toString());
-		response.write("<br><a href=\"/\">Return to form</a>");
-		response.write("<br><a href=\"/data\">See all the data</a>");
-		response.end();
+			// if you have a successful file read, print it
+			// to the client:
+			response.writeHead(200, { 'Content-Type': 'text/html' });
+			response.write("Here's what's in the data.json file: <br>");
+			response.write(data.toString());
+			response.write("<br><a href=\"/\">Return to form</a>");
+			response.write("<br><a href=\"/data\">See all the data</a>");
+			response.end();
+		});
 	});
 });
 
 // respond to POST request to update data:
 server.post('/post', function (request, response) {
+
 	// because you're using the urlencoded middleware,
 	// you can ask for pieces of the request like this:
 	currentData.name = request.body.name;
@@ -69,12 +72,14 @@ server.post('/post', function (request, response) {
 		response.end();
 	}
 	/* 
-		 write to the file asynchronously. THe third parameter of 
-		 writeFile is the callback function that's called when
-		 you've had a successful write. 
+		 If the file exists (F_OK), write to the file asynchronously. 
+		 If it doesn't, create it then write.
+		 The third parameter of  writeFile is the callback 
+		 function that's called when you've had 
+		 a successful write. 
 	*/
-	fs.exists(filePath, function (exists) {
-		if (exists) {
+	fs.access(filePath, fs.constants.F_OK, function (error) {
+		if (!error) {
 			fs.appendFile(filePath, dataString, fileWriteResponse);
 		} else {
 			fs.writeFile(filePath, dataString, fileWriteResponse);
