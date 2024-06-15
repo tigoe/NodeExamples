@@ -11,18 +11,17 @@
 	by Tom Igoe
 	
 */
-let express = require('express'),		// using the express framework
-	fs = require('fs'),						// and the filesystem library	
-	url = require('url');					// and the URL library
-let server = express();							// initalize express
-let currentData = {};						// set up a variable to hold the data
+let express = require('express'),	// using the express framework
+	fs = require('fs'),							// and the filesystem library	
+	url = require('url');						// and the URL library
+let server = express();						// initalize express
 
 server.use(express.urlencoded({ extended: true })); 			// use express' urlencoded middleware
 server.use('/', express.static('public')); // serve static files from /public
 server.listen(8080);								// listen for new requests
 
-// respond to GET request for data
-server.get('/data', function (request, response) {
+/////// callback functions for the server GET calls:
+function readData(request, response) {
 	// the file to the data file on the server:
 	var filePath = './data.json';
 
@@ -46,11 +45,10 @@ server.get('/data', function (request, response) {
 			response.end();
 		});
 	});
-});
+}
 
-// respond to POST request to update data:
-server.post('/post', function (request, response) {
-
+function updateData (request, response) {
+	let currentData = {};		// set up a variable to hold the data
 	// because you're using the urlencoded middleware,
 	// you can ask for pieces of the request like this:
 	currentData.name = request.body.name;
@@ -85,4 +83,11 @@ server.post('/post', function (request, response) {
 			fs.writeFile(filePath, dataString, fileWriteResponse);
 		}
 	});
-});
+}
+
+//////// Here are the RESTful endpoint functions:
+// respond to GET request for data
+server.get('/data', readData);
+
+// respond to POST request to update data:
+server.post('/post', updateData);
