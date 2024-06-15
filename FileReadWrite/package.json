@@ -1,0 +1,11 @@
+{
+  "name": "filereadwrite",
+  "version": "0.0.2",
+  "description": "A simple example to read and write from a file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Igoe",
+  "license": "ISC"
+}
