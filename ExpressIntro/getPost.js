@@ -4,7 +4,7 @@
 	in Express.js 4.0
 
 	created 10 Feb 2015
-  modified 4 Feb 2018
+  modified 16 Oct 2024
 	by Tom Igoe
 */
 
@@ -26,10 +26,18 @@ function serverStart() {
 // this is called by both GET and POST handlers,
 // to format a response to the request:
 function formatResponse(thisContent) {
-	var result = 'You sent me:' +
-  			'\n name: ' + thisContent.name +
-  			'\n age: ' + thisContent.age + '\n';
-  	return result;
+  var result = "";
+  // see if there's any data in the request:
+  if (Object.keys(thisContent).length == 0) {
+    result = "you sent me nothing";
+  } else {
+    result = 'You sent me:';
+    for (item in thisContent) {
+      result += `${item}: ${thisContent[item]}`;
+      result += " ";
+    }
+  }
+  return result;
 }
 
 function handleGet (request, response) {
