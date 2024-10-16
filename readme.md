@@ -17,7 +17,8 @@ The most up-to-date examples are:
 * [glitch-examples](glitch-examples/) - these are examples for express.js, mqtt.js, websockets using ws.js, and  node-fetch.js  that I've posted on [glitch.com](https://glitch.com/@tigoe). Some of these duplicate the express intro examples above.
 * [HTTPS server](HttpsServer) - shows how to use express to respond to HTTPS requests. 
 * [SerialIntro](SerialIntro) - a few examples showing how to use Serialport.js
- 
+* [NodeWithNginx](NodeWithNginx/proxy-server.js) - a minimal proxy server to combine with nginx. 
+  
 There are other examples in the [main directory](/) as well. 
 
 
