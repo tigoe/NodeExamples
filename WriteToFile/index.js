@@ -7,24 +7,28 @@
 	security checks, so use with caution.
 		
 	created 10 Dec 2013 
-	modified 15 Jun 2024
+	modified 28 Oct 2024
 	by Tom Igoe
 	
 */
-let express = require('express'),	// using the express framework
-	fs = require('fs'),							// and the filesystem library	
-	url = require('url');						// and the URL library
+let express = require('express');	// using the express framework
+let fs = require('fs');						// and the filesystem library	
 let server = express();						// initalize express
 
 server.use(express.urlencoded({ extended: true })); 			// use express' urlencoded middleware
 server.use('/', express.static('public')); // serve static files from /public
-server.listen(8080);								// listen for new requests
-
-/////// callback functions for the server GET calls:
-function readData(request, response) {
 	// the file to the data file on the server:
 	var filePath = './data.json';
 
+
+// this runs after the server successfully starts:
+function serverStart() {
+  var port = this.address().port;
+  console.log('Server listening on port '+ port);
+}
+
+/////// callback functions for the requests:
+function readData(request, response) {
 	/* If the file exists (F_OK), read the file  asynchronously.
 		the second parameter of readFile is 
 		the callback function that's called when
@@ -54,8 +58,6 @@ function updateData (request, response) {
 	currentData.name = request.body.name;
 	currentData.duration = request.body.duration;
 
-	// get the path to the data file: 
-	var filePath = './data.json';
 	// convert the data, currently a JSON object, to a string:
 	var dataString = JSON.stringify(currentData) + '\n';
 
@@ -85,7 +87,9 @@ function updateData (request, response) {
 	});
 }
 
-//////// Here are the RESTful endpoint functions:
+// start the server:
+server.listen(process.env.PORT || 8080, serverStart);
+
 // respond to GET request for data
 server.get('/data', readData);
 
