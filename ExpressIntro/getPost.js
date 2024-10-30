@@ -14,12 +14,12 @@
 var express = require('express');			    // include express.js
 var server = express();						        // a local instance of it
 var database = new Array();								// an array to hold data
-var bodyParser = require('body-parser');	// include body-parser
+
 server.use('/',express.static('public')); // serve static files from /public
 
 // you need a couple of parsers for the body of a POST request:
-server.use(bodyParser.json()); 						  // for  application/json
-server.use(bodyParser.urlencoded({extended: false})); // for application/x-www-form-urlencoded
+server.use(express.json()); 						  // for  application/json
+server.use(express.urlencoded({extended: false})); // for application/x-www-form-urlencoded
 
 // this runs after the server successfully starts:
 function serverStart() {
