@@ -14,8 +14,8 @@ The most up-to-date examples are:
   * [fileUploader](ExpressIntro/fileUploader.js) - shows how to use multer.js to make a web page that can upload files to your server. 
   routes
   * [subroutes](ExpressIntro/subroutes.js) - shows how to handle different RESTful subroutes
-* [glitch-examples](glitch-examples/) - these are examples for express.js, mqtt.js, websockets using ws.js, and  node-fetch.js  that I've posted on [glitch.com](https://glitch.com/@tigoe). Some of these duplicate the express intro examples above.
 * [HTTPS server](HttpsServer) - shows how to use express to respond to HTTPS requests. 
+* [node-fetch-client] - a server using node-fetch to access the RESTful API on another site. 
 * [SerialIntro](SerialIntro) - a few examples showing how to use Serialport.js
 * [NodeWithNginx](NodeWithNginx/proxy-server.js) - a minimal proxy server to combine with nginx. 
   
@@ -60,12 +60,6 @@ $ node server.js
 
  Type control-C to stop the project. If you need to run it in the background for as long as the host is running, consider using [PM2](https://pm2.keymetrics.io/docs/usage/quick-start/). 
 
-## Running on Glitch.com
+## Running on Other Hosted Services
 
-If you'd like to run these on [glitch.com](https://www.glitch.com) or [heroku](https://www.heroku.com/) or another node.js host, you may need to change the port number to comply with whatever port the platform runs your scripts on. On glitch.com, you can use:
-
-````js
-process.env.PORT || portnumber
-````
-
-in place of the port number given in these scripts. Some of them have been adjusted accordingly. 
+If you'd like to run these on [heroku](https://www.heroku.com/) or another node.js host, you may need to change the port number to comply with whatever port the platform runs your scripts on.  Some of them have been adjusted accordingly. 
