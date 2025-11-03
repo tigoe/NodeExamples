@@ -15,7 +15,7 @@ The most up-to-date examples are:
   routes
   * [subroutes](ExpressIntro/subroutes.js) - shows how to handle different RESTful subroutes
 * [HTTPS server](HttpsServer) - shows how to use express to respond to HTTPS requests. 
-* [node-fetch-client] - a server using node-fetch to access the RESTful API on another site. 
+* [node-fetch-client](node-fetch-client) - a server using node-fetch to access the RESTful API on another site. 
 * [SerialIntro](SerialIntro) - a few examples showing how to use Serialport.js
 * [NodeWithNginx](NodeWithNginx/proxy-server.js) - a minimal proxy server to combine with nginx. 
   
