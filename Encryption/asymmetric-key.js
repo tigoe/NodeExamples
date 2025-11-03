@@ -100,7 +100,7 @@ function decryptText(someFile) {
   // decrypt it with the private key:
   let result = crypto.privateDecrypt(options, input);
   // print it:
-  console.log(result.toString());
+  console.log('result is: ' + result.toString());
   // clear the key:
   options.key = '';
 }
