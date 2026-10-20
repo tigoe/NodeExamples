@@ -96,9 +96,10 @@ function handleDataRequest(request, response) {
 
 // start the server:
 server.listen(process.env.PORT || 8080, serverStart);
-// to call this: curl localhost:8080/data?key=value
+// to call this: curl 'localhost:8080/data?key=value'
 server.get('/data', handleGet);    // GET request listener
-// to call this: curl localhost:8080/date
+// to call this: curl localhost
+// :8080/date
 server.get('/date', handleDate);   // GET request listener
 // to call this: curl -H 'Content-Type:application/json' -d '{"key":5}' localhost:8080/data
 server.post('/data', handlePost);  // POST request listener
