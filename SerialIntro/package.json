@@ -5,7 +5,7 @@
     "name": "Tom Igoe"
   },
   "dependencies": {
-    "serialport": ">=7.0.0"
+    "serialport": ">=11.0.0"
   },
   "engines": {
     "node": "0.10.x",
